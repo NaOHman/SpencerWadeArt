@@ -21,35 +21,44 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+	 <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <a class="brand" href="/"><img src="logo.png"></a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="/gallery.html">Gallery</a></li>
+                <li><a href="/technique.html">About the Art</a></li>
+                <li><a href="/about.html">About the Artist</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li><a href="/store.html">Store</a></li>
+        	</ul>
+        </div>
+    </nav>
 
-	<div id="slidingGallery" class="carousel slide" data-ride="carousel">
+    <div class="container-fluid">
+    	<div id="slidingGallery" class="carousel slide" data-ride="carousel">
 	  <!-- Indicators -->
 	  <ol class="carousel-indicators">
 	    <li data-target="#slidingGallery" data-slide-to="0" class="active"></li>
 	    <li data-target="#slidingGallery" data-slide-to="1"></li>
-	    <li data-target="#slidingGallery" data-slide-to="2"></li>
 	  </ol>
 	 
 	  <!-- Wrapper for slides -->
-	  <div class="carousel-inner">
-	    <div class="item active">
-	      <img src="http://placehold.it/1200x315" alt="...">
-	      <div class="carousel-caption">
-	          <h3>Caption Text</h3>
-	      </div>
-	    </div>
-	    <div class="item">
-	      <img src="http://placehold.it/1200x315" alt="...">
-	      <div class="carousel-caption">
-	          <h3>Caption Text</h3>
-	      </div>
-	    </div>
-	    <div class="item">
-	      <img src="http://placehold.it/1200x315" alt="...">
-	      <div class="carousel-caption">
-	          <h3>Caption Text</h3>
-	      </div>
-	    </div>
+		<div class="carousel-inner">
+		    <div class="item active">
+		      <img src="http://placehold.it/1200x315" alt="Let's pretend this is a picture of a cat.">
+		      <div class="carousel-caption">
+		          <h3>Let's pretend this is a picture of a cat.</h3>
+		      </div>
+		    </div>
+		    <div class="item">
+		      <img src="http://placehold.it/1200x315" alt="Let's pretend this is a picture of a bike.">
+		      <div class="carousel-caption">
+		          <h3>Let's pretend this is a picture of a bike.</h3>
+		      </div>
+		    </div>
+		</div>
 	  </div>
 	 
 	  <!-- Controls -->
@@ -60,6 +69,8 @@
 	    <span class="glyphicon glyphicon-chevron-right"></span>
 	  </a>
 	</div> <!-- Carousel -->
+    </div>
+	
 
 </body>
 </html>
