@@ -2,10 +2,6 @@ body {
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
-.portfolio-item {
-    margin-bottom: 25px;
-}
-
 .container-centered {
     max-width: 960px;
 }
@@ -13,3 +9,9 @@ body {
 footer {
     margin: 50px 0;
 }
+
+
+/*This was for old portfolio layout - keep it for now until we're sure we won't use it*/
+/*.portfolio-item {
+    margin-bottom: 25px;
+}*/
