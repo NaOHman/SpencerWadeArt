@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title></title>
+	<link rel="stylesheet" type="text/css" media="screen" href="css/master.css" />
+	<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<!--[if IE]>
+		script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+
+<!-- 	Bootstrap 	-->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	 <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <a class="brand" href="/"><img src="images/logo.png"></a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="/gallery.html">Gallery</a></li>
+                <li><a href="/technique.html">About the Art</a></li>
+                <li><a href="/about.html">About the Artist</a></li>
+                <li><a href="/contact.html">Contact</a></li>
+                <li class="active"><a href="/commission.html">Commission</a></li>
+                <li><a href="/store.html">Store</a></li>
+        	</ul>
+        </div>
+    </nav>
+    <h2 class="text-center">Commission Artwork</h2>
+    <div class="container-fluid container-centered">
+        <p>Want me to create a piece of art for you? Please fill out the form below
+        and I'll get back to you in a few days.</p>
+        <form role="form">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label" for="name">Name*</label>
+                    <input type="textbox" name="name" class="form-control">
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label" for="email">Email*</label>
+                    <input type="textbox" name="email" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="control-label" for="timeline">Timeline</label>
+                    <input type="textbox" name="timeline" class="form-control">
+                </div>
+                <div class="col-sm-6">
+                    <label class="control-label" for="budget">Budget</label>
+                    <input type="textbox" name="budget" class="form-control">
+                </div>
+            </div>
+            <label class="control-label" for="message">Describe the commission</label>
+            <textarea rows="5" name="message" class="form-control"></textarea>
+        </form>
+    </div>
+</body>
+</html>
