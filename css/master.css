@@ -28,6 +28,10 @@ footer {
     float:none;
 }
 
+.dropdown-btn {
+	float: right;
+}
+
 .carousel{
     width: 400px;
     text-align: center;
