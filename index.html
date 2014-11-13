@@ -16,16 +16,21 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
+
+	<script type="text/javascript" src="/js/jquery.jcarousel.min.js"></script>
+	<script type="text/javascript" src="/js/jcarousel.responsive.js"></script>
+
     <link rel="stylesheet" type="text/css" media="screen" href="css/master.css" />
 </head>
 <body>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <a class="brand" href="/"><img src="images/logo.png"></a>
         </div>
+            <a class="brand" href="/"><img class="img-responsive center-block" src="images/logo.png"></a>
         <div>
-            <ul class="nav navbar-nav">
+            <ul class="navbar-justice-league nav navbar-nav">
+                <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
                 <li><a href="/gallery.html">Gallery</a></li>
                 <li><a href="/technique.html">About the Art</a></li>
                 <li><a href="/about.html">About the Artist</a></li>
@@ -39,39 +44,25 @@
 <div class="container">
 	<div class="row">
 		<div class="col-1">
-			<div class="container-fluid">
-		    	<div id="slidingGallery" class="carousel slide" data-ride="carousel">
-			  <!-- Indicators -->
-			  <ol class="carousel-indicators">
-			    <li data-target="#slidingGallery" data-slide-to="0" class="active"></li>
-			    <li data-target="#slidingGallery" data-slide-to="1"></li>
-			  </ol>
-			 
-			  <!-- Wrapper for slides -->
-				<div class="carousel-inner">
-				    <div class="item active">
-				      <img src="http://placehold.it/1200x315" alt="Let's pretend this is a picture of a cat.">
-				      <div class="carousel-caption">
-				          <h3>Let's pretend this is a picture of a cat.</h3>
-				      </div>
-				    </div>
-				    <div class="item">
-				      <img src="http://placehold.it/1200x315" alt="Let's pretend this is a picture of a bike.">
-				      <div class="carousel-caption">
-				          <h3>Let's pretend this is a picture of a bike.</h3>
-				      </div>
-				    </div>
-				</div>
-			  </div>
-	 
-			  <!-- Controls -->
-			  <a class="left carousel-control" href="#slidingGallery" role="button" data-slide="prev">
-			    <span class="glyphicon glyphicon-chevron-left"></span>
-			  </a>
-			  <a class="right carousel-control" href="#slidingGallery" role="button" data-slide="next">
-			    <span class="glyphicon glyphicon-chevron-right"></span>
-			  </a>
-			</div> <!-- Carousel -->
+			
+			<div class="jcarousel-wrapper">
+                <div class="jcarousel">
+                    <ul>
+                        <li><img src="/images/1.jpg" alt="..."></li>
+                        <li><img src="/images/2.jpg" alt="..."></li>
+                        <li><img src="/images/3.jpg" alt="..."></li>
+                        <li><img src="/images/honey_badger.jpg" alt="..."></li>
+						<li><img src="/images/painting.jpg" alt="..."></li>
+                        
+                    </ul>
+                </div>
+
+                <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+                <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+
+                <p class="jcarousel-pagination"></p>
+            </div>
+
 		</div>
 	</div>
 	<div class="row">
