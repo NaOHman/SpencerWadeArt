@@ -1,6 +1,9 @@
 body {
     padding-top: 200px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    font-family: "Avant Garde",Avantgarde,"Century Gothic",CenturyGothic,AppleGothic,sans-serif
+    font-family: "Avant Garde",Avantgarde,"Century Gothic",CenturyGothic,AppleGothic,sans-serif;
+    margin: 0;
+    background: url("/../images/background.png") repeat 0 10%;
+    /*opacity: 0.5;*/
 }
 
 .container-centered {
@@ -61,6 +64,7 @@ footer {
     position: relative;
     overflow: hidden;
     width: 100%;
+    background: #fff;
 }
 
 .jcarousel ul {
