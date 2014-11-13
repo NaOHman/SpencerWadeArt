@@ -22,6 +22,10 @@ footer {
  	max-width: 100%;
 }
 
+.dropdown-btn {
+	float: right;
+}
+
 
 /*This was for old portfolio layout - keep it for now until we're sure we won't use it*/
 /*.portfolio-item {
