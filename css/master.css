@@ -1,5 +1,5 @@
 body {
-    padding-top: 150px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    padding-top: 200px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     font-family: "Avant Garde",Avantgarde,"Century Gothic",CenturyGothic,AppleGothic,sans-serif
 }
 
@@ -12,14 +12,17 @@ footer {
 }
 
 .brand{ 
-	margin: 0px;
+	/*margin: 0px;
  	padding: 0px;
+ 	text-align: center;*/
 }
+
 .brand img{
 	width: auto;
 	height : auto;
 	max-height: 100%;
  	max-width: 100%;
+ 	
 }
 .navbar-justice-league{
     margin: 0 auto;
