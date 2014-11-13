@@ -24,6 +24,12 @@ footer {
  	max-width: 100%;
  	
 }
+.navbar-justice-league{
+    margin: 0 auto;
+    display: table;
+    table-layout: fixed;
+    float:none;
+}
 
 
 /*This was for old portfolio layout - keep it for now until we're sure we won't use it*/
