@@ -11,12 +11,6 @@ footer {
     margin: 50px 0;
 }
 
-.brand{ 
-	/*margin: 0px;
- 	padding: 0px;
- 	text-align: center;*/
-}
-
 .brand img{
 	width: auto;
 	height : auto;
@@ -31,6 +25,11 @@ footer {
     float:none;
 }
 
+.carousel-inner > .item > img {
+    margin: 0 auto;
+    text-align: center;
+    height: 250px;
+}
 
 /*This was for old portfolio layout - keep it for now until we're sure we won't use it*/
 /*.portfolio-item {
