@@ -148,10 +148,10 @@ $(function() {
 
 	$(".dropdown-menu li").on('click', function() {
 		var inButton = $("#dropdownMenu").text();
-		var selected = $(this).find("a").text();
+		var selected = $(this).find("a#sortItem").text();
 		$("#dropdownMenu").text(selected);
 		$("#dropdownMenu").append(' <span class="caret"></span>');
-		$(this).find("a").text(inButton);
+		$(this).find("a#sortItem").text(inButton);
 
 		switch(selected) {
 			case "Price: highest first":
