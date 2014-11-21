@@ -1,0 +1,366 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title
+    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+    //if IE
+      | script src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
+    // Custom css and js for gallery
+    link(rel='stylesheet', type='text/css', href='css/default.css')
+    link(rel='stylesheet', type='text/css', href='css/component.css')
+    script(src='js/modernizr.custom.js')
+    // Bootstrap
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
+    // Latest compiled and minified JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        a.brand(href='/')
+          img.img-responsive.center-block(src='images/logo.png')
+      div
+        ul.navbar-justice-league.nav.navbar-nav
+          li
+            a(href='/')
+              span.glyphicon.glyphicon-home
+          li.active
+            a(href='/gallery') Gallery
+          li
+            a(href='/technique') About the Art
+          li
+            a(href='/about') About the Artist
+          li
+            a(href='/contact') Contact
+          li
+            a(href='/commission') Commission
+          li
+            a(href='/store') Store
+    .container
+      header.clearfix
+        h1
+          | Thumbnail Grid 
+          span with Expanding Preview
+      |         
+      .main
+        ul#og-grid.og-grid
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/2.jpg', data-title='Veggies sunt bona vobis', data-description='Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.')
+              img(src='images/thumbs/2.jpg', alt='img02')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/3.jpg', data-title='Dandelion horseradish', data-description='Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.')
+              img(src='images/thumbs/3.jpg', alt='img03')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/2.jpg', data-title='Veggies sunt bona vobis', data-description='Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.')
+              img(src='images/thumbs/2.jpg', alt='img02')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/3.jpg', data-title='Dandelion horseradish', data-description='Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.')
+              img(src='images/thumbs/3.jpg', alt='img03')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/2.jpg', data-title='Veggies sunt bona vobis', data-description='Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.')
+              img(src='images/thumbs/2.jpg', alt='img02')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/3.jpg', data-title='Dandelion horseradish', data-description='Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.')
+              img(src='images/thumbs/3.jpg', alt='img03')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter Apurslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/2.jpg', data-title='Veggies sunt bona vobis', data-description='Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.')
+              img(src='images/thumbs/2.jpg', alt='img02')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/3.jpg', data-title='Dandelion horseradish', data-description='Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.')
+              img(src='images/thumbs/3.jpg', alt='img03')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/2.jpg', data-title='Veggies sunt bona vobis', data-description='Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.')
+              img(src='images/thumbs/2.jpg', alt='img02')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/3.jpg', data-title='Dandelion horseradish', data-description='Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.')
+              img(src='images/thumbs/3.jpg', alt='img03')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/2.jpg', data-title='Veggies sunt bona vobis', data-description='Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.')
+              img(src='images/thumbs/2.jpg', alt='img02')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/3.jpg', data-title='Dandelion horseradish', data-description='Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.')
+              img(src='images/thumbs/3.jpg', alt='img03')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/2.jpg', data-title='Veggies sunt bona vobis', data-description='Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.')
+              img(src='images/thumbs/2.jpg', alt='img02')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/3.jpg', data-title='Dandelion horseradish', data-description='Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.')
+              img(src='images/thumbs/3.jpg', alt='img03')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/2.jpg', data-title='Veggies sunt bona vobis', data-description='Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.')
+              img(src='images/thumbs/2.jpg', alt='img02')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/3.jpg', data-title='Dandelion horseradish', data-description='Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.')
+              img(src='images/thumbs/3.jpg', alt='img03')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/2.jpg', data-title='Veggies sunt bona vobis', data-description='Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.')
+              img(src='images/thumbs/2.jpg', alt='img02')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/3.jpg', data-title='Dandelion horseradish', data-description='Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.')
+              img(src='images/thumbs/3.jpg', alt='img03')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/2.jpg', data-title='Veggies sunt bona vobis', data-description='Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.')
+              img(src='images/thumbs/2.jpg', alt='img02')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/3.jpg', data-title='Dandelion horseradish', data-description='Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.')
+              img(src='images/thumbs/3.jpg', alt='img03')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/2.jpg', data-title='Veggies sunt bona vobis', data-description='Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.')
+              img(src='images/thumbs/2.jpg', alt='img02')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/3.jpg', data-title='Dandelion horseradish', data-description='Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.')
+              img(src='images/thumbs/3.jpg', alt='img03')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/2.jpg', data-title='Veggies sunt bona vobis', data-description='Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.')
+              img(src='images/thumbs/2.jpg', alt='img02')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/3.jpg', data-title='Dandelion horseradish', data-description='Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.')
+              img(src='images/thumbs/3.jpg', alt='img03')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/2.jpg', data-title='Veggies sunt bona vobis', data-description='Komatsuna prairie turnip wattle seed artichoke mustard horseradish taro rutabaga ricebean carrot black-eyed pea turnip greens beetroot yarrow watercress kombu.')
+              img(src='images/thumbs/2.jpg', alt='img02')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/3.jpg', data-title='Dandelion horseradish', data-description='Cabbage bamboo shoot broccoli rabe chickpea chard sea lettuce lettuce ricebean artichoke earthnut pea aubergine okra brussels sprout avocado tomato.')
+              img(src='images/thumbs/3.jpg', alt='img03')
+          |                 
+          li
+            a(href='/checkout.html', data-largesrc='images/1.jpg', data-title='Azuki bean', data-description='Swiss chard pumpkin bunya nuts maize plantain aubergine napa cabbage soko coriander sweet pepper water spinach winter purslane shallot tigernut lentil beetroot.')
+              img(src='images/thumbs/1.jpg', alt='img01')
+    // /container
+    script(src='js/grid.js')
+    |     
+    script.
+      $(function() {
+      Grid.init();
+      });
+    //
+      OLD BOOTSTRAP PORTFOLIO GRID
+    //
+      <!-- Page Content --/>
+      <div class="container">
+      <!-- Page Header --/>
+      <div class="row">
+      <div class="col-lg-12">
+      <h1 class="page-header">Gallery
+      <small>It's beautiful...</small>
+      </h1>
+      </div>
+      </div>
+      <!-- /.row
+    //
+      Projects Row --/>
+      <div class="row">
+      <div class="col-md-4 portfolio-item">
+      <a href="#">
+      <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+      </a>
+      <h3>
+      <a href="#">Project Name</a>
+      </h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+      </div>
+      <div class="col-md-4 portfolio-item">
+      <a href="#">
+      <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+      </a>
+      <h3>
+      <a href="#">Project Name</a>
+      </h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+      </div>
+      <div class="col-md-4 portfolio-item">
+      <a href="#">
+      <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+      </a>
+      <h3>
+      <a href="#">Project Name</a>
+      </h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+      </div>
+      </div>
+      <!-- /.row
+    //
+      Projects Row --/>
+      <div class="row">
+      <div class="col-md-4 portfolio-item">
+      <a href="#">
+      <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+      </a>
+      <h3>
+      <a href="#">Project Name</a>
+      </h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+      </div>
+      <div class="col-md-4 portfolio-item">
+      <a href="#">
+      <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+      </a>
+      <h3>
+      <a href="#">Project Name</a>
+      </h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+      </div>
+      <div class="col-md-4 portfolio-item">
+      <a href="#">
+      <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+      </a>
+      <h3>
+      <a href="#">Project Name</a>
+      </h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+      </div>
+      </div>
+      <!-- Projects Row --/>
+      <div class="row">
+      <div class="col-md-4 portfolio-item">
+      <a href="#">
+      <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+      </a>
+      <h3>
+      <a href="#">Project Name</a>
+      </h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+      </div>
+      <div class="col-md-4 portfolio-item">
+      <a href="#">
+      <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+      </a>
+      <h3>
+      <a href="#">Project Name</a>
+      </h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+      </div>
+      <div class="col-md-4 portfolio-item">
+      <a href="#">
+      <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+      </a>
+      <h3>
+      <a href="#">Project Name</a>
+      </h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
+      </div>
+      </div>
+      <!-- /.row --/>
+      <hr>
+      <!-- Pagination --/>
+      <div class="row text-center">
+      <div class="col-lg-12">
+      <ul class="pagination">
+      <li>
+      <a href="#">&laquo;</a>
+      </li>
+      <li class="active">
+      <a href="#">1</a>
+      </li>
+      <li>
+      <a href="#">2</a>
+      </li>
+      <li>
+      <a href="#">3</a>
+      </li>
+      <li>
+      <a href="#">4</a>
+      </li>
+      <li>
+      <a href="#">5</a>
+      </li>
+      <li>
+      <a href="#">&raquo;</a>
+      </li>
+      </ul>
+      </div>
+      </div>
+      <!-- /.row --/>
+      <hr>
+      <!-- Footer --/>
+      <footer>
+      <div class="row">
+      <div class="col-lg-12">
+      <p>Footer Text</p>
+      </div>
+      </div>
+      <!-- /.row --/>
+      </footer>
+      </div>
+      <!-- /.container --/>
