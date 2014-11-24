@@ -42,20 +42,9 @@ html
           .jcarousel-wrapper
             .jcarousel
               ul
-                li
-                  img(src='/images/1.jpg', alt='...')
-                |                         
-                li
-                  img(src='/images/2.jpg', alt='...')
-                |                         
-                li
-                  img(src='/images/3.jpg', alt='...')
-                |                         
-                li
-                  img(src='/images/honey_badger.jpg', alt='...')
-                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-                li
-                  img(src='/images/painting.jpg', alt='...')
+                each val in pictures
+                  li
+                    img(src=val.imgsrc, alt=val.title)
             |                 
             a.jcarousel-control-prev(href='#') &lsaquo;
             |                 
