@@ -36,7 +36,35 @@ app.get('/store', function(req,res){
 })
 
 app.get('/gallery', function(req,res){
-    res.render('gallery', null)
+    res.render('gallery', {pictures: [
+            {imgsrc: 'images/1.jpg', title: 'Azuki bean', 
+             description: "blah", 
+             imgthumb: 'images/thumbs/1.jpg', alt: 'img01'},
+            {imgsrc: 'images/2.jpg', title: 'Azuki bean', 
+             description: "blah", 
+             imgthumb: 'images/thumbs/2.jpg', alt: 'img01'},
+            {imgsrc: 'images/3.jpg', title: 'Azuki bean', 
+             description: "blah", 
+             imgthumb: 'images/thumbs/3.jpg', alt: 'img01'},
+            {imgsrc: 'images/1.jpg', title: 'Azuki bean', 
+             description: "blah", 
+             imgthumb: 'images/thumbs/1.jpg', alt: 'img01'},
+            {imgsrc: 'images/2.jpg', title: 'Azuki bean', 
+             description: "blah", 
+             imgthumb: 'images/thumbs/2.jpg', alt: 'img01'},
+            {imgsrc: 'images/3.jpg', title: 'Azuki bean', 
+             description: "blah", 
+             imgthumb: 'images/thumbs/3.jpg', alt: 'img01'},
+            {imgsrc: 'images/1.jpg', title: 'Azuki bean', 
+             description: "blah", 
+             imgthumb: 'images/thumbs/1.jpg', alt: 'img01'},
+            {imgsrc: 'images/2.jpg', title: 'Azuki bean', 
+             description: "blah", 
+             imgthumb: 'images/thumbs/2.jpg', alt: 'img01'},
+            {imgsrc: 'images/3.jpg', title: 'Azuki bean', 
+             description: "blah", 
+             imgthumb: 'images/thumbs/3.jpg', alt: 'img01'}
+    ]})
 })
 
 app.get('/contact', function(req,res){
