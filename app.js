@@ -63,6 +63,10 @@ app.get('/store', function(req,res){
     res.render('store', null)
 })
 
+app.get('/checkout', function(req,res){
+    res.render('checkout', null)
+})
+
 app.get('/gallery', function(req,res){
     res.render('gallery', {pictures: [
             {imgsrc: 'images/1.jpg', title: 'Azuki bean', 
@@ -105,6 +109,10 @@ app.get('/commission', function(req,res){
 
 app.get('/admin', function(req,res){
     res.render('admin', null)
+})
+
+app.get('/error', function(req,res){
+    res.render('error', null)
 })
 
 server.listen(8080, function() {
