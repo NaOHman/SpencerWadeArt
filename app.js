@@ -121,31 +121,31 @@ app.get('/checkout', function(req,res){
 app.get('/gallery', function(req,res){
     res.render('gallery', {pictures: [
             {imgsrc: 'images/1.jpg', title: 'Azuki bean', 
-             description: "blah", 
+             description: "blah", size: '16x9', price: '$1000',
              imgthumb: 'images/thumbs/1.jpg', alt: 'img01'},
             {imgsrc: 'images/2.jpg', title: 'Azuki bean', 
-             description: "blah", 
+             description: "blah", size: '16x9', price: '$1000',
              imgthumb: 'images/thumbs/2.jpg', alt: 'img01'},
             {imgsrc: 'images/3.jpg', title: 'Azuki bean', 
-             description: "blah", 
+             description: "blah", size: '16x9', price: '$1000',
              imgthumb: 'images/thumbs/3.jpg', alt: 'img01'},
             {imgsrc: 'images/1.jpg', title: 'Azuki bean', 
-             description: "blah", 
+             description: "blah", size: '16x9', price: '$1000',
              imgthumb: 'images/thumbs/1.jpg', alt: 'img01'},
             {imgsrc: 'images/2.jpg', title: 'Azuki bean', 
-             description: "blah", 
+             description: "blah", size: '16x9', price: '$1000',
              imgthumb: 'images/thumbs/2.jpg', alt: 'img01'},
             {imgsrc: 'images/3.jpg', title: 'Azuki bean', 
-             description: "blah", 
+             description: "blah", size: '16x9', price: '$1000',
              imgthumb: 'images/thumbs/3.jpg', alt: 'img01'},
             {imgsrc: 'images/1.jpg', title: 'Azuki bean', 
-             description: "blah", 
+             description: "blah", size: '16x9', price: '$1000',
              imgthumb: 'images/thumbs/1.jpg', alt: 'img01'},
             {imgsrc: 'images/2.jpg', title: 'Azuki bean', 
-             description: "blah", 
+             description: "blah", size: '16x9', price: '$1000',
              imgthumb: 'images/thumbs/2.jpg', alt: 'img01'},
             {imgsrc: 'images/3.jpg', title: 'Azuki bean', 
-             description: "blah", 
+             description: "blah", size: '16x9', price: '$1000',
              imgthumb: 'images/thumbs/3.jpg', alt: 'img01'}
     ]})
 })
@@ -159,7 +159,35 @@ app.get('/commission', function(req,res){
 })
 
 app.get('/admin', function(req,res){
-    res.render('admin', null)
+     res.render('admin', {pictures: [
+            {imgsrc: 'images/1.jpg', title: 'Azuki bean', subtile: 'subtitle thing',
+             description: "blah", size: '16x9', price: '$1000', forSale: false, onHome: true,
+             imgthumb: 'images/thumbs/1.jpg', alt: 'img01'},
+            {imgsrc: 'images/2.jpg', title: 'Azuki bean', subtile: 'subtitle thing',
+             description: "blah", size: '16x9', price: '$1000',forSale: false, onHome: true,
+             imgthumb: 'images/thumbs/2.jpg', alt: 'img01'},
+            {imgsrc: 'images/3.jpg', title: 'Azuki bean', subtile: 'subtitle thing',
+             description: "blah", size: '16x9', price: '$1000',forSale: false, onHome: true,
+             imgthumb: 'images/thumbs/3.jpg', alt: 'img01'},
+            {imgsrc: 'images/1.jpg', title: 'Azuki bean', subtile: 'subtitle thing',
+             description: "blah", size: '16x9', price: '$1000',forSale: false, onHome: true,
+             imgthumb: 'images/thumbs/1.jpg', alt: 'img01'},
+            {imgsrc: 'images/2.jpg', title: 'Azuki bean', subtile: 'subtitle thing',
+             description: "blah", size: '16x9', price: '$1000',forSale: false, onHome: false,
+             imgthumb: 'images/thumbs/2.jpg', alt: 'img01'},
+            {imgsrc: 'images/3.jpg', title: 'Azuki bean', subtile: 'subtitle thing',
+             description: "blah", size: '16x9', price: '$1000',forSale: false, onHome: true,
+             imgthumb: 'images/thumbs/3.jpg', alt: 'img01'},
+            {imgsrc: 'images/1.jpg', title: 'Azuki bean', subtile: 'subtitle thing',
+             description: "blah", size: '16x9', price: '$1000',forSale: true, onHome: false,
+             imgthumb: 'images/thumbs/1.jpg', alt: 'img01'},
+            {imgsrc: 'images/2.jpg', title: 'Azuki bean', subtile: 'subtitle thing',
+             description: "blah", size: '16x9', price: '$1000',forSale: true, onHome: true,
+             imgthumb: 'images/thumbs/2.jpg', alt: 'img01'},
+            {imgsrc: 'images/3.jpg', title: 'Azuki bean', subtile: 'subtitle thing',
+             description: "blah", size: '16x9', price: '$1000',forSale: false, onHome: true,
+             imgthumb: 'images/thumbs/3.jpg', alt: 'img01'}
+    ]})
 })
 
 app.get('/error', function(req,res){
