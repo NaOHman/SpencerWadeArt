@@ -5,11 +5,7 @@ html
     title
     script(src='http://code.jquery.com/jquery-1.11.0.min.js')
     //if IE
-<<<<<<< HEAD
       | script(src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
-=======
-      | script src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
->>>>>>> 20226a91816ddf7bbc10c536b84fec9cace707c0
     // Bootstrap
     // Latest compiled and minified CSS
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
@@ -55,7 +51,6 @@ html
             button#dropdownMenu.btn.btn-default.dropdown-toggle(type='button', data-toggle='dropdown', aria-expanded='true')
               | Price: highest first
               span.caret
-<<<<<<< HEAD
             ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
               li(role='presentation')
                 a#sortItem(role='menuitem', tabindex='-1', href='#') Price: lowest first
@@ -73,39 +68,10 @@ html
                 a#sortItem(role='menuitem', tabindex='-1', href='#') Medium: Z-A
               li(role='presentation')
                 a#sortItem(role='menuitem', tabindex='-1', href='#') Size: highest first
-=======
-            |     &#x9;&#x9;&#x9;&#x9;&#x9;
-            ul.dropdown-menu(role='menu', aria-labelledby='dropdownMenu')
-              li(role='presentation')
-                a#sortItem(role='menuitem', tabindex='-1', href='#') Price: lowest first
-              |     &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-              li(role='presentation')
-                a#sortItem(role='menuitem', tabindex='-1', href='#') Name: A-Z
-              |                             
-              li(role='presentation')
-                a#sortItem(role='menuitem', tabindex='-1', href='#') Name: Z-A
-              |     &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-              li(role='presentation')
-                a#sortItem(role='menuitem', tabindex='-1', href='#') Most Recent
-              |                             
-              li(role='presentation')
-                a#sortItem(role='menuitem', tabindex='-1', href='#') Oldest
-              |     &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-              li(role='presentation')
-                a#sortItem(role='menuitem', tabindex='-1', href='#') Medium: A-Z
-              |                             
-              li(role='presentation')
-                a#sortItem(role='menuitem', tabindex='-1', href='#') Medium: Z-A
-              |     &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
-              li(role='presentation')
-                a#sortItem(role='menuitem', tabindex='-1', href='#') Size: highest first
-              |                             
->>>>>>> 20226a91816ddf7bbc10c536b84fec9cace707c0
               li(role='presentation')
                 a#sortItem(role='menuitem', tabindex='-1', href='#') Size: lowest first
         // row
         hr
-<<<<<<< HEAD
     .container.projects-container
 
       each val in pictures
@@ -126,134 +92,3 @@ html
                 p.price $
                     =val.price
                 a.buy-btn(href='/checkout') Buy
-=======
-    |     &#x9;&#x9;
-    .container.projects-container
-
-      each val in pictures
-        - var title = val.title
-        - var medium = val.medium
-        - var size = val.size
-        - var width = val.width
-        - var height = val.height
-        - var date = val.date
-        - var imgsrc = val.imgsrc
-        - var price = val.price
-        include store-item.jade
-
-      //- // Project One
-      //- .row.project(data-date='4', data-name='awesomecat', data-medium='acrylic', data-size='400', data-price='1000000')
-      //-   .col-md-6
-      //-     // <a href="/checkout.html"></a>
-      //-     img.img-responsive(src='images/3.jpg', alt='')
-      //-   |     &#x9;&#x9;&#x9;
-      //-   .col-md-6
-      //-     h3#name Awesome Cat
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h4#medium Acrylic on canvas
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h4#dimension 20 x 20
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h5#date January 4th, 1991
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     p#description
-      //-       | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium veniam exercitationem expedita laborum at voluptate. Labore, voluptates totam at aut nemo deserunt rem magni pariatur quos perspiciatis atque eveniet unde.
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     p#price $1, 000, 000
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     a.buy-btn(href='/checkout.html') Buy
-      //- // /.row
-      //- // Project Two
-      //- .row.project(data-date='1', data-name='cutecat', data-medium='oil', data-size='240', data-price='1000001')
-      //-   .col-md-6
-      //-     // <a href="/checkout.html"></a>
-      //-     img.img-responsive(src='images/3.jpg', alt='')
-      //-   |     &#x9;&#x9;&#x9;
-      //-   .col-md-6
-      //-     h3#name Cute Cat
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h4#medium Oil on canvas
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h4#dimension 12.5 x 20
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h5#date January 1st, 1991
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     p#description
-      //-       | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut, odit velit cumque vero doloremque repellendus distinctio maiores rem expedita a nam vitae modi quidem similique ducimus! Velit, esse totam tempore.
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     p#price $1, 000, 001
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     a.buy-btn(href='/checkout.html') Buy
-      //- // /.row
-      //- // Project Three
-      //- .row.project(data-date='5', data-name='sweetcat', data-medium='pencil', data-size='200', data-price='1000050')
-      //-   .col-md-6
-      //-     // <a href="/checkout.html"></a>
-      //-     img.img-responsive(src='images/3.jpg', alt='')
-      //-   |     &#x9;&#x9;&#x9;
-      //-   .col-md-6
-      //-     h3#name Sweet Cat
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h4#medium Pencil
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h4#dimension 12 x 20
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h5#date January 5th, 1991
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     p#description
-      //-       | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, temporibus, dolores, at, praesentium ut unde repudiandae voluptatum sit ab debitis suscipit fugiat natus velit excepturi amet commodi deleniti alias possimus!
-      //-     |  
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     p#price $1, 000, 050
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     a.buy-btn(href='/checkout.html') Buy
-      //- // /.row
-      //- // Project Four
-      //- .row.project(data-date='3', data-name='adorablecat', data-medium='pastel', data-size='300', data-price='1000000000')
-      //-   .col-md-6
-      //-     // <a href="/checkout.html"></a>
-      //-     img.img-responsive(src='images/3.jpg', alt='')
-      //-   |     &#x9;&#x9;&#x9;
-      //-   .col-md-6
-      //-     h3#name Adorable Cat
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h4#medium Pastel
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h4#dimension 10 x 30
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h5#date January 3rd, 1991
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     p#description
-      //-       | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, quidem, consectetur, officia rem officiis illum aliquam perspiciatis aspernatur quod modi hic nemo qui soluta aut eius fugit quam in suscipit?
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     p#price $1, 000, 000, 000
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     a.buy-btn(href='/checkout.html') Buy
-      //- // /.row
-      //- // Project Five
-      //- .row.project(data-date='2', data-name='sassycat', data-medium='aquarel', data-size='600', data-price='100')
-      //-   .col-md-6
-      //-     // <a href="/checkout.html"></a>
-      //-     img.img-responsive(src='images/3.jpg', alt='')
-      //-   |     &#x9;&#x9;&#x9;
-      //-   .col-md-6
-      //-     h3#name Sassy Cat
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h4#medium Aquarel
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h4#dimension 20 x 30
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     h5#date January 2nd, 1991
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     p#description
-      //-       | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, quo, minima, inventore voluptatum saepe quos nostrum provident ex quisquam hic odio repellendus atque porro distinctio quae id laboriosam facilis dolorum.
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     p#price $100
-      //-     |     &#x9;&#x9;&#x9;&#x9;
-      //-     a.buy-btn(href='/checkout.html') Buy
-      // /.row
-    //
-      /.projects-container
-      </div>
-      <!-- /.container
->>>>>>> 20226a91816ddf7bbc10c536b84fec9cace707c0

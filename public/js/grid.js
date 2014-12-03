@@ -512,8 +512,4 @@ var Grid = (function() {
 		addItems : addItems
 	};
 
-<<<<<<< HEAD
 })();
-=======
-})();
->>>>>>> 20226a91816ddf7bbc10c536b84fec9cace707c0

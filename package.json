@@ -3,16 +3,11 @@
   "description": "Node Collaborative Drawing",
   "version": "1.0.0",
   "dependencies": {
-<<<<<<< HEAD
     "thumbnail": "^0.1.9",
     "formidable": "^1.0.15",
     "connect-busboy": "^0.0.2",
     "express": "~4.0.0",
     "mongoskin": "^1.4.4",
-=======
-    "body-parser": "^1.9.2",
-    "express": "~4.0.0",
->>>>>>> 20226a91816ddf7bbc10c536b84fec9cace707c0
     "jade": "^1.7.0",
     "morgan": "^1.5.0",
     "socket.io": "^1.2.0"
