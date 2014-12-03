@@ -15,8 +15,12 @@ html
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
     |     
     link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
+<<<<<<< HEAD
   block body
     - var myMonths = ['---', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Nov','Dec']
+=======
+  body
+>>>>>>> 20226a91816ddf7bbc10c536b84fec9cace707c0
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container
         a.brand(href='/')
@@ -37,7 +41,11 @@ html
             a(href='/contact') Contact
           li
             a(href='/commission') Commission
+<<<<<<< HEAD
           li
+=======
+          li.active
+>>>>>>> 20226a91816ddf7bbc10c536b84fec9cace707c0
             a(href='/store') Store
     // Page Content
     .container
@@ -45,6 +53,7 @@ html
       .row
         .col-lg-12
           h1.page-header Add artwork 
+<<<<<<< HEAD
           form(role='form', enctype="multipart/form-data", method='post', action='upload')
             .row
               .col-sm-6
@@ -106,6 +115,64 @@ html
                     label
                       input(type='checkbox', value='', checked='', name='onHome')
                       | Show on Homepage
+=======
+          |                 
+          form(role='form')
+            label.control-label(for='upload') Upload Image
+            |                     
+            input(type='file', name='upload')
+            |                     
+            .row
+              .col-sm-6
+                label.control-label(for='title') Title
+                |                             
+                input.form-control(type='textbox', name='title')
+              |                         
+              .col-sm-6
+                label.control-label(for='subtitle') Subtitle
+                |                             
+                input.form-control(type='textbox', name='subtitle')
+            |                     
+            .row
+              .col-sm-6
+                label.control-label(for='size') Size
+                |                             
+                input.form-control(type='textbox', name='size')
+              |                         
+              .col-sm-6
+                label.control-label(for='medium') Medium
+                |                             
+                select.form-control(name='medium')
+                  option(value='oil') Oil
+                  |                                 
+                  option(value='acrylic') Acrylic
+                  |                                 
+                  option(value='charcol') Charcol
+                  |                                 
+                  option(value='ink') Ink
+                  |                                 
+                  option(value='ceramic') Ceramic
+            |                     
+            label.control-label(for='description') Description
+            |                     
+            textarea.form-control(rows='5', name='description')
+            |                     
+            .controls.form-inline
+              label.control-label(for='price') Price
+              |                         
+              input.form-control(type='textbox', name='price')
+              |                         
+              .checkbox
+                label
+                  input(type='checkbox', value='', checked='')
+                  |                                 For Sale
+                |                             
+                label
+                  input(type='checkbox', value='', checked='')
+                  |                                 Show in Gallery
+              |                         
+              button.btn.btn-primary(type='submit') Save
+>>>>>>> 20226a91816ddf7bbc10c536b84fec9cace707c0
       // /.row
       .row
         .col-lg-12
@@ -113,6 +180,7 @@ html
       // Project One
       each val in pictures
         .row
+<<<<<<< HEAD
           .col-md-6
             img.img-responsive(src=val.imgsrc, alt=val.alt)
           .col-md-6
@@ -179,6 +247,40 @@ html
               .col-sm-12
                 button.btn.btn-primary Remove From Website
                 button.btn.btn-primary(type='submit') Save Changes
+=======
+          .col-md-7
+            a(href='#')
+              img.img-responsive(src=val.imgsrc, alt=val.alt)
+          .col-md-5
+            form(role='form')
+              label.control-label(for='title') Title
+              input.form-control(type='textbox', name='title', value=val.title)
+              label.control-label(for='subtitle') Subtitle
+              input.form-control(type='textbox', name='subtitle', value=val.subtitle)
+              label.control-label(for='size') Size
+              input.form-control(type='textbox', name='size', value=val.size)
+              label.control-label(for='medium') Medium
+              select.form-control(name='medium')
+                option(value='oil') Oil
+                option(value='acrylic') Acrylic
+                option(value='charcol') Charcol
+                option(value='ink') Ink
+                option(value='ceramic') Ceramic
+              label.control-label(for='description') Description
+              textarea.form-control(rows='5', name='description')
+                  =val.description
+              .checkbox
+                label
+                  input(type='checkbox', value='', checked=(val.forSale ? "checked" : undefined)) 
+                  | For Sale
+                label
+                  input(type='checkbox', value='', checked=(val.onHome ? "checked" : undefined)) 
+                  | On Homepage
+              label.control-label(for='price') Price
+              input.form-control(type='textbox', name='price', value=val.price)
+              button.btn.btn-primary Remove From Website
+              button.btn.btn-primary(type='submit') Save Changes
+>>>>>>> 20226a91816ddf7bbc10c536b84fec9cace707c0
             hr
             // Footer
       footer
