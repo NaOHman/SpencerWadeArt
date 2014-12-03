@@ -1,0 +1,52 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title
+    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+    //if IE
+      | script src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
+    // Bootstrap
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
+    // Latest compiled and minified JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        a.brand(href='/')
+          img.img-responsive.center-block(src='images/logo.png')
+      div
+        ul.navbar-justice-league.nav.navbar-nav
+          li
+            a(href='/')
+              span.glyphicon.glyphicon-home
+          li
+            a(href='/gallery') Gallery
+          li.active
+            a(href='/technique') About the Art
+          li
+            a(href='/about') About the Artist
+          li
+            a(href='/contact') Contact
+          li
+            a(href='/commission') Commission
+          li
+            a(href='/store') Store
+    .container-fluid.container-centered
+      .col-xs-6
+        .embed-responsive.embed-responsive-16by9
+          iframe.embed-responsive-item(width='420', height='315', src='https://www.youtube.com/embed/ZZ5LpwO-An4?rel=0&showinfo=0', allowfullscreen='')
+      .col-xs-6
+        h2.text-center Making the Magic
+        p
+          | Spencer works in a basement in the light of a single window and the all the lamps that
+          | that his housemates leave down there. Sometimes when he hits a roadblock in his painting
+          | he sits down for a good session of shoot the nazis or skyrim. He doesn't like to
+          | cut his oil paints which means that they don't last as long but it produces
+          | more vibrant colors and lets him play with things like texture
+        p
+          | There's also some other cool things that Spencer does that makes his
+          | art cool and unique and things and stuff. In general Spencer uses paintbrushes
+          | to put paint on canvases.

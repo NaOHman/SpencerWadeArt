@@ -1,0 +1,65 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title
+    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+    //if IE
+      | script src=&quot;http://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;
+    // Bootstrap
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
+    // Latest compiled and minified JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        a.brand(href='/')
+          img.img-responsive.center-block(src='images/logo.png')
+      div
+        ul.navbar-justice-league.nav.navbar-nav
+          li
+            a(href='/')
+              span.glyphicon.glyphicon-home
+          li
+            a(href='/gallery') Gallery
+          li
+            a(href='/technique') About the Art
+          li
+            a(href='/about') About the Artist
+          li
+            a(href='/contact') Contact
+          li.active
+            a(href='/commission') Commission
+          li
+            a(href='/store') Store
+    h2.text-center Commission Artwork
+    .container-fluid.container-centered
+      p
+        | Want me to create a piece of art for you? Please fill out the form below
+        | and I&apos;ll get back to you in a few days.
+      form(role='form')
+        .row
+          .col-sm-6
+            label.control-label(for='name') Name*
+            input.form-control(type='textbox', name='name')
+          .col-sm-6
+            label.control-label(for='email') Email*
+            input.form-control(type='textbox', name='email')
+        .row
+          .col-sm-6
+            label.control-label(for='timeline') Timeline
+            |                     
+            input.form-control(type='textbox', name='timeline')
+          |                 
+          .col-sm-6
+            label.control-label(for='budget') Budget
+            |                     
+            input.form-control(type='textbox', name='budget')
+        |             
+        label.control-label(for='message') Describe the commission
+        |             
+        textarea.form-control(rows='5', name='message')
+        |             
+        button.btn.btn-default.btn-block(type='submit') Send

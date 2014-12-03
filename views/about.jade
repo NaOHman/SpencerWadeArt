@@ -1,0 +1,58 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title
+    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+    //if IE
+      | script src=&quot;http://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;
+    // Bootstrap
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
+    // Latest compiled and minified JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        a.brand(href='/')
+          img.img-responsie.center-block(src='images/logo.png')
+      div
+        ul.navbar-justice-league.nav.navbar-nav
+          li
+            a(href='/')
+              span.glyphicon.glyphicon-home
+          li
+            a(href='/gallery') Gallery
+          li
+            a(href='/technique') About the Art
+          li.active
+            a(href='/about') About the Artist
+          li
+            a(href='/contact') Contact
+          li
+            a(href='/commission') Commission
+          li
+            a(href='/store') Store
+    .container-fluid.container-centered
+      #photo.col-xs-4
+        img.img-responsive(src='images/spencer.jpg')
+      |         
+      #bio.col-xs-8
+        h2  Bio 
+        |             
+        p
+          | Spencer Wade began drawing when he was two years old. By the time he was three his sketch series
+          | Spaghetti Sauce on kitchen wall won national aclaim. He is currently studying art at Macalester
+          | College in Saint Paul Minnesota. Currently he paints in the basement of Berkeley Haus primarily using uncut oils
+          | on canvas. You probably haven&apos;t heard of him because he&apos;s too cool for you.
+        |             
+        h2  Inspiration 
+        |             
+        p
+          | Spencer really likes animals. Like a lot. Like a lot a lot. He has many fond
+          | memories of watching animal planet and channels this into his artwork. Spencer
+          | holds his nature documentaries to a high standard. for instance he was very
+          | upset about the honey badger documentary he watched last week because it
+          | played to existing honey badger stereotypes instead of providing the
+          | hard hitting badger facts he craves.

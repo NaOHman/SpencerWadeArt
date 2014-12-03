@@ -1,0 +1,149 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    |     
+    title
+    |     
+    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+    //if IE
+      | script src=&quot;http://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;
+    // Bootstrap
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
+    // Latest compiled and minified JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    |     
+    link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        a.brand(href='/')
+          img.img-responsive.center-block(src='images/logo.png')
+      |         
+      div
+        ul.navbar-justice-league.nav.navbar-nav
+          li
+            a(href='/')
+              span.glyphicon.glyphicon-home
+          li
+            a(href='/gallery') Gallery
+          li
+            a(href='/technique') About the Art
+          li
+            a(href='/about') About the Artist
+          li
+            a(href='/contact') Contact
+          li
+            a(href='/commission') Commission
+          li.active
+            a(href='/store') Store
+    // Page Content
+    .container
+      // Page Heading
+      .row
+        .col-lg-12
+          h1.page-header Add artwork 
+          |                 
+          form(role='form')
+            label.control-label(for='upload') Upload Image
+            |                     
+            input(type='file', name='upload')
+            |                     
+            .row
+              .col-sm-6
+                label.control-label(for='title') Title
+                |                             
+                input.form-control(type='textbox', name='title')
+              |                         
+              .col-sm-6
+                label.control-label(for='subtitle') Subtitle
+                |                             
+                input.form-control(type='textbox', name='subtitle')
+            |                     
+            .row
+              .col-sm-6
+                label.control-label(for='size') Size
+                |                             
+                input.form-control(type='textbox', name='size')
+              |                         
+              .col-sm-6
+                label.control-label(for='medium') Medium
+                |                             
+                select.form-control(name='medium')
+                  option(value='oil') Oil
+                  |                                 
+                  option(value='acrylic') Acrylic
+                  |                                 
+                  option(value='charcol') Charcol
+                  |                                 
+                  option(value='ink') Ink
+                  |                                 
+                  option(value='ceramic') Ceramic
+            |                     
+            label.control-label(for='description') Description
+            |                     
+            textarea.form-control(rows='5', name='description')
+            |                     
+            .controls.form-inline
+              label.control-label(for='price') Price
+              |                         
+              input.form-control(type='textbox', name='price')
+              |                         
+              .checkbox
+                label
+                  input(type='checkbox', value='', checked='')
+                  |                                 For Sale
+                |                             
+                label
+                  input(type='checkbox', value='', checked='')
+                  |                                 Show in Gallery
+              |                         
+              button.btn.btn-primary(type='submit') Save
+      // /.row
+      .row
+        .col-lg-12
+          h1 Change Artwork Information
+      // Project One
+      each val in pictures
+        .row
+          .col-md-7
+            a(href='#')
+              img.img-responsive(src=val.imgsrc, alt=val.alt)
+          .col-md-5
+            form(role='form')
+              label.control-label(for='title') Title
+              input.form-control(type='textbox', name='title', value=val.title)
+              label.control-label(for='subtitle') Subtitle
+              input.form-control(type='textbox', name='subtitle', value=val.subtitle)
+              label.control-label(for='size') Size
+              input.form-control(type='textbox', name='size', value=val.size)
+              label.control-label(for='medium') Medium
+              select.form-control(name='medium')
+                option(value='oil') Oil
+                option(value='acrylic') Acrylic
+                option(value='charcol') Charcol
+                option(value='ink') Ink
+                option(value='ceramic') Ceramic
+              label.control-label(for='description') Description
+              textarea.form-control(rows='5', name='description')
+                  =val.description
+              .checkbox
+                label
+                  input(type='checkbox', value='', checked=(val.forSale ? "checked" : undefined)) 
+                  | For Sale
+                label
+                  input(type='checkbox', value='', checked=(val.onHome ? "checked" : undefined)) 
+                  | On Homepage
+              label.control-label(for='price') Price
+              input.form-control(type='textbox', name='price', value=val.price)
+              button.btn.btn-primary Remove From Website
+              button.btn.btn-primary(type='submit') Save Changes
+            hr
+            // Footer
+      footer
+        .row
+          .col-lg-12
+            p
+        // /.row
+    // /.container

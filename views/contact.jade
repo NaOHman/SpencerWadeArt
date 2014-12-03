@@ -1,0 +1,78 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title
+    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+    //if IE
+      | script src='http://html5shiv.googlecode.com/svn/trunk/html5.js)
+    // Bootstrap
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
+    // Latest compiled and minified JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        a.brand(href='/')
+          img.img-responsive.center-block(src='images/logo.png')
+      div
+        ul.navbar-justice-league.nav.navbar-nav
+          li
+            a(href='/')
+              span.glyphicon.glyphicon-home
+          li
+            a(href='/gallery') Gallery
+          li
+            a(href='/technique') About the Art
+          li
+            a(href='/about') About the Artist
+          li.active
+            a(href='/contact') Contact
+          li
+            a(href='/commission') Commission
+          li
+            a(href='/store') Store
+    .container-fluid
+      .col-xs-8
+        h2.text-center Send me a message
+        |             
+        form#contact-form.form-horizontal
+          .form-group
+            label.col-sm-2.control-label(for='name') Name
+            |                     
+            .col-sm-10
+              input.form-control(name='name', type='textbox')
+          |                 
+          .form-group
+            label.col-sm-2.control-label(for='email') Email Address
+            |                     
+            .col-sm-10
+              input.form-control(name='email', type='textbox')
+          |                 
+          .form-group
+            label.col-sm-2.control-label(for='subject') Subject
+            |                     
+            .col-sm-10
+              input.form-control(name='subject', type='textbox')
+          |                 
+          .form-group
+            label.col-sm-2.control-label(for='message') Message
+            |                     
+            .col-sm-10
+              textarea.form-control(rows='5', name='message')
+              |                         
+              button.btn.btn-default.btn-block(type='submit') Send
+      |         
+      .cols-xs-4
+        h2.text-center Want to commission a piece of artwork?
+        |             
+        p.text-center
+          | Checkout out the 
+          a(href='/commission') Commission page
+        |             
+        img.center-block(src='images/phone.png', alt='phone')
+        |             
+        p.text-center ###.###.####
+        p

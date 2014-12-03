@@ -1,0 +1,71 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title
+    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+    //if IE
+      | script src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
+    // Bootstrap
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
+    // Latest compiled and minified JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    script(type='text/javascript', src='/js/jquery.jcarousel.min.js')
+    script(type='text/javascript', src='/js/jcarousel.responsive.js')
+    link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+      a.brand(href='/')
+        img.img-responsive.center-block(src='images/logo.png')
+      div
+        ul.navbar-justice-league.nav.navbar-nav
+          li.active
+            a(href='/')
+              span.glyphicon.glyphicon-home
+          li
+            a(href='/gallery') Gallery
+          li
+            a(href='/technique') About the Art
+          li
+            a(href='/about') About the Artist
+          li
+            a(href='/contact') Contact
+          li
+            a(href='/commission') Commission
+          li
+            a(href='/store') Store
+    .container
+      .row
+        .col-1
+          .jcarousel-wrapper
+            .jcarousel
+              ul
+                each val in pictures
+                  li
+                    img(src=val.imgsrc, alt=val.title)
+            |                 
+            a.jcarousel-control-prev(href='#') &lsaquo;
+            |                 
+            a.jcarousel-control-next(href='#') &rsaquo;
+            |                 
+            p.jcarousel-pagination
+      | &#x9;
+      .row
+        .col-1
+          .container
+            h5
+              | Welcome to Spencer Wade Art! Feel free to explore the website for the amazing colorblind artist! If you are intersted in browsing Spencer&apos;s many paintings, take a look at the 
+              a(href='/gallery.html') gallery
+              | . Interested in learnig more about this unique art? Check out our 
+              a(href='/technique.html') about the art
+              |  page! Curious who the mysterious Spencer Wade is? Read 
+              a(href='/about.html') this
+              |  for his biography and inspirations. Want to contact Spencer? We have a 
+              a(href='/contact.html') page
+              |  for that, too! If you know what you want, feel free to make a 
+              a(href='/comission.html') comission
+              | . Want to buy a specific painting? Try out the 
+              a(href='/store.html') store
+              | ! Literally click any of those links or the nav bar on top and stop reading this dumb flavor text. Please.
