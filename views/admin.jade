@@ -15,7 +15,8 @@ html
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
     |     
     link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
-  body
+  block body
+    - var myMonths = ['---', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Nov','Dec']
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container
         a.brand(href='/')
@@ -36,7 +37,7 @@ html
             a(href='/contact') Contact
           li
             a(href='/commission') Commission
-          li.active
+          li
             a(href='/store') Store
     // Page Content
     .container
@@ -44,62 +45,67 @@ html
       .row
         .col-lg-12
           h1.page-header Add artwork 
-          |                 
-          form(role='form')
-            label.control-label(for='upload') Upload Image
-            |                     
-            input(type='file', name='upload')
-            |                     
+          form(role='form', enctype="multipart/form-data", method='post', action='upload')
+            .row
+              .col-sm-6
+                label.control-label(for='fileUpload') Upload Image
+                span.required *
+                input(type='file', name='fileUpload', required)
+              .col-sm-6
+                label.control-label(for='price') Price
+                span.required *
+                .input-group
+                    span.input-group-addon 
+                        | $
+                    input.form-control(type='number', min='0', name='price', required)
             .row
               .col-sm-6
                 label.control-label(for='title') Title
-                |                             
-                input.form-control(type='textbox', name='title')
-              |                         
-              .col-sm-6
-                label.control-label(for='subtitle') Subtitle
-                |                             
-                input.form-control(type='textbox', name='subtitle')
-            |                     
-            .row
-              .col-sm-6
-                label.control-label(for='size') Size
-                |                             
-                input.form-control(type='textbox', name='size')
-              |                         
+                span.required *
+                input.form-control(type='textbox', required, name='title')
+              .col-sm-2
+                label.control-label(for='height') Height (in)
+                span.required *
+                input.form-control(type='number', name='height', min='0', required)
+              .col-sm-2
+                label.control-label(for='width') Width (in)
+                span.required *
+                input.form-control(type='number', name='width', min='0', required)
+              .col-sm-2
+                label.control-label(for='depth') Depth (in)
+                input.form-control(type='number', name='depth', min='0')
+            .row 
               .col-sm-6
                 label.control-label(for='medium') Medium
-                |                             
-                select.form-control(name='medium')
-                  option(value='oil') Oil
-                  |                                 
-                  option(value='acrylic') Acrylic
-                  |                                 
-                  option(value='charcol') Charcol
-                  |                                 
-                  option(value='ink') Ink
-                  |                                 
-                  option(value='ceramic') Ceramic
-            |                     
-            label.control-label(for='description') Description
-            |                     
-            textarea.form-control(rows='5', name='description')
-            |                     
-            .controls.form-inline
-              label.control-label(for='price') Price
-              |                         
-              input.form-control(type='textbox', name='price')
-              |                         
-              .checkbox
-                label
-                  input(type='checkbox', value='', checked='')
-                  |                                 For Sale
-                |                             
-                label
-                  input(type='checkbox', value='', checked='')
-                  |                                 Show in Gallery
-              |                         
-              button.btn.btn-primary(type='submit') Save
+                span.required *
+                input.form-control(type='textbox', required, name='medium')
+              .col-sm-2
+                label.control-label(for='month') Month
+                select.form-control(type='month', name='month')
+                  each m in myMonths
+                    option #{m}
+              .col-sm-2
+                  label.control-label(for='day') Day
+                  input.form-control(type='number',min='1', max='31', name='day')
+              .col-sm-2
+                  label.control-label(for='year') Year
+                  span.required *
+                  input.form-control(type='number', min='2000', max='2100', required, name='year')
+            .row
+               .col-sm-12
+                  label.control-label(for='description') Description
+                  textarea.form-control(rows='5', name='description')
+            .row
+              .col-sm-12
+                .controls.form-inline
+                  button.btn.btn-primary(type='submit') Save
+                  .checkbox
+                    label
+                      input(type='checkbox', value='', checked='', name='forSale')
+                      | For Sale
+                    label
+                      input(type='checkbox', value='', checked='', name='onHome')
+                      | Show on Homepage
       // /.row
       .row
         .col-lg-12
@@ -107,38 +113,72 @@ html
       // Project One
       each val in pictures
         .row
-          .col-md-7
-            a(href='#')
-              img.img-responsive(src=val.imgsrc, alt=val.alt)
-          .col-md-5
+          .col-md-6
+            img.img-responsive(src=val.imgsrc, alt=val.alt)
+          .col-md-6
             form(role='form')
-              label.control-label(for='title') Title
-              input.form-control(type='textbox', name='title', value=val.title)
-              label.control-label(for='subtitle') Subtitle
-              input.form-control(type='textbox', name='subtitle', value=val.subtitle)
-              label.control-label(for='size') Size
-              input.form-control(type='textbox', name='size', value=val.size)
-              label.control-label(for='medium') Medium
-              select.form-control(name='medium')
-                option(value='oil') Oil
-                option(value='acrylic') Acrylic
-                option(value='charcol') Charcol
-                option(value='ink') Ink
-                option(value='ceramic') Ceramic
-              label.control-label(for='description') Description
-              textarea.form-control(rows='5', name='description')
-                  =val.description
-              .checkbox
-                label
-                  input(type='checkbox', value='', checked=(val.forSale ? "checked" : undefined)) 
-                  | For Sale
-                label
-                  input(type='checkbox', value='', checked=(val.onHome ? "checked" : undefined)) 
-                  | On Homepage
-              label.control-label(for='price') Price
-              input.form-control(type='textbox', name='price', value=val.price)
-              button.btn.btn-primary Remove From Website
-              button.btn.btn-primary(type='submit') Save Changes
+            .row
+              .col-sm-12
+                label.control-label(for='title', required) Title
+                span.required *
+                input.form-control(type='textbox', name='title', required, value=val.title)
+            .row 
+              .col-sm-12
+                label.control-label(for='medium') Medium
+                span.required *
+                input.form-control(type='textbox', required, name='medium', value=val.medium)
+            .row
+              .col-sm-12
+                label.control-label(for='price') Price
+                span.required *
+                .input-group
+                    span.input-group-addon 
+                        | $
+                    input.form-control(type='number', min='0', name='price', value=val.price, required)
+            .row
+              .col-sm-4
+                label.control-label(for='height') Height (in)
+                span.required *
+                input.form-control(type='number', name='height', min='0', value=val.height, required)
+              .col-sm-4
+                label.control-label(for='width') Width (in)
+                span.required *
+                input.form-control(type='number', name='width', min='0', value=val.width, required)
+              .col-sm-4
+                label.control-label(for='depth') Depth (in)
+                input.form-control(type='number', name='depth', min='0', value=val.depth)
+            .row
+              .col-sm-4
+                label.control-label(for='month') Month
+                select.form-control(type='month', name='month')
+                  each m in myMonths
+                    option(selected=val.month == m) #{m}
+              .col-sm-4
+                  label.control-label(for='day') Day
+                  input.form-control(type='number',min='1', max='31', name='day', value=val.day)
+              .col-sm-4
+                  label.control-label(for='year') Year
+                  span.required *
+                  input.form-control(type='number', min='2000', max='2100', required, value=val.year name='year')
+            .row
+               .col-sm-12
+                  label.control-label(for='description') Description
+                  textarea.form-control(rows='5', name='description')
+                    =val.description
+            .row
+              .col-sm-12
+                .controls.form-inline
+                  .checkbox
+                    label
+                      input(type='checkbox', checked=val.forSale, name='forSale')
+                      | For Sale
+                    label
+                      input(type='checkbox', checked=val.onHome, name='onHome')
+                      | Show on Homepage
+            .row
+              .col-sm-12
+                button.btn.btn-primary Remove From Website
+                button.btn.btn-primary(type='submit') Save Changes
             hr
             // Footer
       footer
