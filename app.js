@@ -4,6 +4,7 @@ var express = require('express');
 var path = require('path');
 var fs = require('fs');
 var logger = require('morgan');
+var bodyParser = require("body-parser");
 var Thumbnail = require('thumbnail');
 var thumb = new Thumbnail(path.join(__dirname, 'public','images'),
                           path.join(__dirname, 'public','images','thumbs'));
@@ -14,11 +15,13 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io')(server);
 
-app.use(logger('dev'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(logger('dev'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req, res, next) {
 	if (!collections.art) {
 		return next(new Error('No Collections.'));
@@ -30,6 +33,16 @@ app.use(function(req, res, next) {
 function monthToN(month){
     return ['---','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Nov','Dec'].indexOf(month);
 }
+
+app.put('/remove', function(req, res){
+    console.log("Remove " + req.params.id);
+    res.send({success: true});
+});
+
+app.put('/save/:id', function(req, res){
+    console.log(req.params.id);
+    res.send({success: true})
+})
 
 app.post('/upload', function(req, res) {
     var form = new formidable.IncomingForm();
@@ -53,34 +66,34 @@ app.post('/upload', function(req, res) {
                            if (err)
                                throw err;
                            fields.imgthumb = path.join('images','thumbs',filename);
-                            fields.imgsrc = src_name;
-                            fields.medium = fields.medium.charAt(0).toUpperCase() + fields.medium.slice(1).toLowerCase();
-                            fields.alt = fields.title;
-                            fields.size = fields.height * fields.width;
-                            fields.dim = fields.width + 'x' + fields.height;
-                            fields.date = fields.year;
-                            fields.numdate = (fields.year*1000) + (monthToN(fields.month)*100) + fields.day;
-                            if (fields.depth != '')
-                                    fields.dim = fields.dim +'x' + fields.depth;
-                            if (fields.month != ''){
-                                if (fields.day == '')
-                                    fields.date = fields.month + ' ' + fields.date;
-                                else
-                                    fields.date = fields.month + ' '+ fields.day +', ' + fields.date;
-                            }
-                            if (fields.hasOwnProperty('forSale'))
-                                fields.forSale = true;
-                            else
-                                fields.forSale = false;
-                            if (fields.hasOwnProperty('onHome'))
-                                fields.onHome = true;
-                            else
-                                fields.onHome = false;
-                            req.collections.art.insert(fields, function(error,response){
-                                if (error)
-                                    throw error;
-                                res.redirect('/admin');
-                            });
+                           fields.imgsrc = src_name;
+                           fields.medium = fields.medium.charAt(0).toUpperCase() + fields.medium.slice(1).toLowerCase();
+                           fields.alt = fields.title;
+                           fields.size = fields.height * fields.width;
+                           fields.dim = fields.width + 'x' + fields.height;
+                           fields.date = fields.year;
+                           fields.numdate = (fields.year*1000) + (monthToN(fields.month)*100) + fields.day;
+                           if (fields.depth != '')
+                                   fields.dim = fields.dim +'x' + fields.depth;
+                           if (fields.month != ''){
+                               if (fields.day == '')
+                                   fields.date = fields.month + ' ' + fields.date;
+                               else
+                                   fields.date = fields.month + ' '+ fields.day +', ' + fields.date;
+                           }
+                           if (fields.hasOwnProperty('forSale'))
+                               fields.forSale = true;
+                           else
+                               fields.forSale = false;
+                           if (fields.hasOwnProperty('onHome'))
+                               fields.onHome = true;
+                           else
+                               fields.onHome = false;
+                           req.collections.art.insert(fields, function(error,response){
+                               if (error)
+                                   throw error;
+                               res.redirect('/admin');
+                           });
                         });
                     }
                 });
