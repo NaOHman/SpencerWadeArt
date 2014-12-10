@@ -5,9 +5,6 @@ var path = require('path');
 var fs = require('fs');
 var logger = require('morgan');
 var bodyParser = require("body-parser");
-var Thumbnail = require('thumbnail');
-var thumb = new Thumbnail(path.join(__dirname, 'public','images'),
-                          path.join(__dirname, 'public','images','thumbs'));
 var mongoskin = require('mongoskin');
 var db = mongoskin.db('mongodb://localhost:27017/artwork', {safe: true});
 var collections = {art: db.collection('art')};
@@ -63,39 +60,34 @@ app.post('/upload', function(req, res) {
                         res.status(500);
                         res.json({'success': false});
                     } else {
-                        thumb.ensureThumbnail(file_name+'.'+file_ext, null, 250, function(err, filename){
-                           if (err)
-                               throw err;
-                           fields.imgthumb = path.join('images','thumbs',filename);
-                           fields.imgsrc = src_name;
-                           fields.medium = fields.medium.charAt(0).toUpperCase() + fields.medium.slice(1).toLowerCase();
-                           fields.alt = fields.title;
-                           fields.size = fields.height * fields.width;
-                           fields.dim = fields.width + 'x' + fields.height;
-                           fields.date = fields.year;
-                           fields.numdate = (fields.year*1000) + (monthToN(fields.month)*100) + fields.day;
-                           if (fields.depth != '')
-                                   fields.dim = fields.dim +'x' + fields.depth;
-                           if (fields.month != ''){
-                               if (fields.day == '')
-                                   fields.date = fields.month + ' ' + fields.date;
-                               else
-                                   fields.date = fields.month + ' '+ fields.day +', ' + fields.date;
-                           }
-                           if (fields.hasOwnProperty('forSale'))
-                               fields.forSale = true;
+                       fields.imgsrc = src_name;
+                       fields.medium = fields.medium.charAt(0).toUpperCase() + fields.medium.slice(1).toLowerCase();
+                       fields.alt = fields.title;
+                       fields.size = fields.height * fields.width;
+                       fields.dim = fields.width + 'x' + fields.height;
+                       fields.date = fields.year;
+                       fields.numdate = (fields.year*1000) + (monthToN(fields.month)*100) + fields.day;
+                       if (fields.depth != '')
+                               fields.dim = fields.dim +'x' + fields.depth;
+                       if (fields.month != ''){
+                           if (fields.day == '')
+                               fields.date = fields.month + ' ' + fields.date;
                            else
-                               fields.forSale = false;
-                           if (fields.hasOwnProperty('onHome'))
-                               fields.onHome = true;
-                           else
-                               fields.onHome = false;
-                           req.collections.art.insert(fields, function(error,response){
-                               if (error)
-                                   throw error;
-                               res.redirect('/admin');
-                           });
-                        });
+                               fields.date = fields.month + ' '+ fields.day +', ' + fields.date;
+                       }
+                       if (fields.hasOwnProperty('forSale'))
+                           fields.forSale = true;
+                       else
+                           fields.forSale = false;
+                       if (fields.hasOwnProperty('onHome'))
+                           fields.onHome = true;
+                       else
+                           fields.onHome = false;
+                       req.collections.art.insert(fields, function(error,response){
+                           if (error)
+                               throw error;
+                           res.redirect('/admin');
+                       });
                     }
                 });
             });
