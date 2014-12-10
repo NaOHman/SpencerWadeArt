@@ -3,14 +3,20 @@
   "description": "Node Collaborative Drawing",
   "version": "1.0.0",
   "dependencies": {
+<<<<<<< HEAD
     "thumbnail": "^0.1.9",
     "formidable": "^1.0.15",
     "body-parser": "^1.9.2",
+=======
+>>>>>>> 3e2ba04c68e56568bcd64737719bbc940f7e0157
     "connect-busboy": "^0.0.2",
     "express": "~4.0.0",
-    "mongoskin": "^1.4.4",
+    "formidable": "^1.0.15",
     "jade": "^1.7.0",
+    "mongoskin": "^1.4.4",
     "morgan": "^1.5.0",
-    "socket.io": "^1.2.0"
+    "socket.io": "^1.2.0",
+    "stripe": "^3.0.2",
+    "thumbnail": "^0.1.9"
   }
 }

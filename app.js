@@ -34,15 +34,16 @@ function monthToN(month){
     return ['---','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Nov','Dec'].indexOf(month);
 }
 
-app.put('/remove', function(req, res){
-    console.log("Remove " + req.params.id);
-    res.send({success: true});
-});
 
 app.put('/save/:id', function(req, res){
     console.log(req.params.id);
     res.send({success: true})
-})
+});
+
+app.put('/remove', function(req, res){
+    console.log("Remove " + req.params.id);
+    res.send({success: true});
+});
 
 app.post('/upload', function(req, res) {
     var form = new formidable.IncomingForm();

@@ -19,12 +19,13 @@ $(document).ready(function() {
             }
         });
     });
-    $('.save-btn').on('click', function(event){
+    $('.update-art').submit(function(event){
+        event.preventDefault();
         var id = $(this).attr('data-id').replace(/"/g,'');
         var query = url + '/save/' + id;
-        alert(query);
+        alert("Put to " + query);
         $.ajax({
-            url: '/save',
+            url: query,
             type: 'PUT',
             contentType: 'application/json',
             dataType: 'json',
@@ -34,7 +35,7 @@ $(document).ready(function() {
                 alert(data);
             },
             error: function(xhr, status, errorThrown){
-                alert("Problem deleting artwork");
+                alert("Problem updating artwork");
             }
         });
     });

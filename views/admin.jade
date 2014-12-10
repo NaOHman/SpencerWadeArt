@@ -117,7 +117,7 @@ html
           .col-md-6
             img.img-responsive(src=val.imgsrc, alt=val.alt)
           .col-md-6
-            form(role='form', action='save', method='post')
+            form.update-art(data-id=val._id, role='form')
                 .row
                   .col-sm-12
                     label.control-label(for='title', required) Title
@@ -179,7 +179,7 @@ html
                 .row
                   .col-sm-12
                     button.btn.btn-primary.remove-btn(data-id=val._id) Remove From Website
-                    button.btn.save-btn.btn-primary(data-id=val._id) Save Changes
+                    input.btn.btn-primary(type='submit', value="Save Changes")
             hr
             // Footer
       footer
