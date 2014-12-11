@@ -1,24 +1,26 @@
 $(document).ready(function() {
-    var url = 'localhost:8080';
+    var url = 'http://localhost:8080';
     $('.remove-btn').on('click', function(event){
+        event.preventDefault();
         var id = $(this).attr('data-id').replace(/"/g,'');
         var query = url + '/remove';
-        alert(query)
+        var imgsrc = $(this).attr('data-src')
         $.ajax({
             url: query,
-            type: 'PUT',
-            contentTyspe: 'application/json',
+            type: 'POST',
+            contentType: 'application/json',
             dataType: 'json',
-            data: JSON.stringify({id: id}),
+            data: JSON.stringify({myId: id,
+                                  imgPath: imgsrc}),
             success: function(data){
                 location.reload(true);
-                alert(data);
             },
             error: function(xhr, status, errorThrown){
-                alert("Problem deleting artwork");
+                alert("There was a problem deleting the artwork");
             }
         });
     });
+    /*
     $('.update-art').submit(function(event){
         event.preventDefault();
         var id = $(this).attr('data-id').replace(/"/g,'');
@@ -26,10 +28,10 @@ $(document).ready(function() {
         alert("Put to " + query);
         $.ajax({
             url: query,
-            type: 'PUT',
+            type: 'POST',
             contentType: 'application/json',
             dataType: 'json',
-            data: JSON.stringify({id: id}),
+            data: JSON.stringify({myId: id}),
             success: function(data){
                 location.reload(true);
                 alert(data);
@@ -39,4 +41,5 @@ $(document).ready(function() {
             }
         });
     });
+        */
 });

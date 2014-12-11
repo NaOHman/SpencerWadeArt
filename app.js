@@ -31,15 +31,56 @@ function monthToN(month){
     return ['---','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Nov','Dec'].indexOf(month);
 }
 
+function formToDB(fields){
+    fields.medium = fields.medium.charAt(0).toUpperCase() + fields.medium.slice(1).toLowerCase();
+    fields.alt = fields.title;
+    fields.size = fields.height * fields.width;
+    fields.dim = fields.width + 'x' + fields.height;
+    fields.date = fields.year;
+    fields.numdate = (fields.year*1000) + (monthToN(fields.month)*100) + fields.day;
+    if (fields.depth != '')
+           fields.dim = fields.dim +'x' + fields.depth;
+    if (fields.month != ''){
+       if (fields.day == '')
+           fields.date = fields.month + ' ' + fields.date;
+       else
+           fields.date = fields.month + ' '+ fields.day +', ' + fields.date;
+    }
+    if (fields.hasOwnProperty('forSale'))
+       fields.forSale = true;
+    else
+       fields.forSale = false;
+    if (fields.hasOwnProperty('onHome'))
+       fields.onHome = true;
+    else
+       fields.onHome = false;
+    return fields
+}
 
-app.put('/save/:id', function(req, res){
-    console.log(req.params.id);
-    res.send({success: true})
+app.post('/save', function(req, res){
+    var fields = req.body;
+    var myId = mongoskin.helper.toObjectID(fields.artId);
+    delete(fields.artId);
+    fields = formToDB(fields);
+    req.collections.art.update({_id: myId},{$set: fields}, function(err, response){
+        if (err)
+            console.log(err);
+        res.redirect('/admin')
+    })
 });
 
-app.put('/remove', function(req, res){
-    console.log("Remove " + req.params.id);
-    res.send({success: true});
+app.post('/remove', function(req, res){
+    myId = mongoskin.helper.toObjectID(req.body.myId);
+    imgPath = path.join(__dirname, 'public', req.body.imgPath);
+    fs.unlink(imgPath, function(err, fd){
+        if (err)
+            console.log(err);
+    });
+    req.collections.art.remove({"_id": myId}, function(err, response){
+        if (err)
+            console.log(err);
+        res.send({success: true});
+    })
 });
 
 app.post('/upload', function(req, res) {
@@ -61,28 +102,7 @@ app.post('/upload', function(req, res) {
                         res.json({'success': false});
                     } else {
                        fields.imgsrc = src_name;
-                       fields.medium = fields.medium.charAt(0).toUpperCase() + fields.medium.slice(1).toLowerCase();
-                       fields.alt = fields.title;
-                       fields.size = fields.height * fields.width;
-                       fields.dim = fields.width + 'x' + fields.height;
-                       fields.date = fields.year;
-                       fields.numdate = (fields.year*1000) + (monthToN(fields.month)*100) + fields.day;
-                       if (fields.depth != '')
-                               fields.dim = fields.dim +'x' + fields.depth;
-                       if (fields.month != ''){
-                           if (fields.day == '')
-                               fields.date = fields.month + ' ' + fields.date;
-                           else
-                               fields.date = fields.month + ' '+ fields.day +', ' + fields.date;
-                       }
-                       if (fields.hasOwnProperty('forSale'))
-                           fields.forSale = true;
-                       else
-                           fields.forSale = false;
-                       if (fields.hasOwnProperty('onHome'))
-                           fields.onHome = true;
-                       else
-                           fields.onHome = false;
+                       fields = formToDB(fields);
                        req.collections.art.insert(fields, function(error,response){
                            if (error)
                                throw error;

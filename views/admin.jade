@@ -117,7 +117,8 @@ html
           .col-md-6
             img.img-responsive(src=val.imgsrc, alt=val.alt)
           .col-md-6
-            form.update-art(data-id=val._id, role='form')
+            form.update-art(method='post', action='save', role='form')
+                input(type='hidden', value=val._id, name='artId')
                 .row
                   .col-sm-12
                     label.control-label(for='title', required) Title
@@ -178,7 +179,7 @@ html
                           | Show on Homepage
                 .row
                   .col-sm-12
-                    button.btn.btn-primary.remove-btn(data-id=val._id) Remove From Website
+                    button.btn.btn-primary.remove-btn(data-id=val._id, data-src=val.imgsrc) Remove From Website
                     input.btn.btn-primary(type='submit', value="Save Changes")
             hr
             // Footer
