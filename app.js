@@ -24,15 +24,16 @@ app.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded bo
 app.use(logger('dev'));
 
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(function(req, res, next) {
+app.use(function(err, req, res, next) {
 	if (!collections.art) {
 		return next(new Error('No Collections.'));
 	}
+    if(err.status==404) {
+        res.render('error');
+    }
 	req.collections = collections;
 	next();
 });
-
-require('./routes/routes.js')(app, mongoskin, path);
 
 var smtpTransport = nodemailer.createTransport("SMTP",{
     service: "localhost", //set to localhost when using fakeSMTP
@@ -42,12 +43,7 @@ var smtpTransport = nodemailer.createTransport("SMTP",{
     }
 });
 
-app.use(function(err,req,res,next) {
-    if(err.status!==404) {
-        return next();
-    }
-    res.render('error');
-});
+require('./routes/routes.js')(app, mongoskin, path, smtpTransport);
 
 server.listen(8080, function() {
     var host = server.address().address;

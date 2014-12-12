@@ -2,7 +2,7 @@
 var formidable = require('formidable');
 var fs = require('fs');
 
-module.exports = function(app, mongoskin, path) {
+module.exports = function(app, mongoskin, path, smtpTransport) {
 
     //route for updating artwork from the admin page
     app.post('/save', function(req, res){
@@ -64,6 +64,32 @@ module.exports = function(app, mongoskin, path) {
             });
         });
     });
+
+    
+    //route for sending email
+    app.get('/send',function(req,res) {
+        var query = url.parse(req.url, true).query;
+        var from = query.sendername+" <"+query.from+">";
+        var subject = query.subject;
+        var text = query.message;
+        smtpTransport.sendMail({
+            from: from,
+            to: "Dum Dum <spencerwadetest@gmail.com>",
+            subject: subject,
+            text: text
+        }, function(error, response) {
+            if(error) {
+                console.log(error);
+                res.send(500);
+            }
+            else {
+                res.send(200);
+                console.log("Message send: " + response.message);
+            }
+            smtpTransport.close();
+        });
+    });
+
 
     //the home page
     app.get('/', function(req,res){
@@ -131,28 +157,6 @@ module.exports = function(app, mongoskin, path) {
         res.render('error', null)
     });
 
-    app.get('/send',function(req,res) {
-        var query = url.parse(req.url, true).query;
-        var from = query.sendername+" <"+query.from+">";
-        var subject = query.subject;
-        var text = query.message;
-        smtpTransport.sendMail({
-            from: from,
-            to: "Dum Dum <spencerwadetest@gmail.com>",
-            subject: subject,
-            text: text
-        }, function(error, response) {
-            if(error) {
-                console.log(error);
-                res.send(500);
-            }
-            else {
-                res.send(200);
-                console.log("Message send: " + response.message);
-            }
-            smtpTransport.close();
-        });
-})
 
     //required to make sorting by date work properly
     function monthToN(month){
