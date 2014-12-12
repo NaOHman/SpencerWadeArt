@@ -2,6 +2,7 @@ var http = require('http');
 var formidable = require('formidable');
 var express = require('express');
 var path = require('path');
+var url = require('url');
 var fs = require('fs');
 var logger = require('morgan');
 var Thumbnail = require('thumbnail');
@@ -13,6 +14,7 @@ var collections = {art: db.collection('art')};
 var app = express();
 var server = http.createServer(app);
 var io = require('socket.io')(server);
+var nodemailer = require("nodemailer");
 
 app.use(logger('dev'));
 app.set('views', path.join(__dirname, 'views'));
@@ -148,6 +150,99 @@ app.get('/admin', function(req,res){
 app.get('/error', function(req,res){
     res.render('error', null)
 });
+
+var bodyParser = require('body-parser')
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
+
+//app.use(express.json());       // to support JSON-encoded bodies
+//app.use(express.urlencoded()); // to support URL-encoded bodies
+
+var smtpTransport = nodemailer.createTransport("SMTP",{
+    service: "localhost",
+    auth: {
+        user: "spencerwadetest@gmail.com",
+        pass: "bootsandcats"
+    }
+})
+
+app.get('/send',function(req,res) {
+    var query = url.parse(req.url, true).query;
+    var from = query.sendername+" <"+query.from+">";
+    var subject = query.subject;
+    var text = query.message;
+    console.log("normal send called");
+    //console.log(req.data.sendername);
+    //console.log(req.url.sendername);
+    smtpTransport.sendMail({
+        from: from,
+        to: "Dum Dum <spencerwadetest@gmail.com>",
+        subject: subject,
+        text: text
+        }, function(error, response) {
+            if(error) {
+                console.log(error);
+                res.send(500);
+            }
+            else {
+                res.send(200);
+                console.log("Message send: " + response.message);
+            }
+            smtpTransport.close();
+        });
+})
+
+/*
+app.get('/send/:sendername/:from/:subject/:message', function(req, res) {
+    console.log(req.data.sendername);
+    console.log(req.url.sendername);
+    var from = req.params.sendername+" <"+req.params.from+">";
+    console.log(from);
+    smtpTransport.sendMail({
+        from: from,
+        to: "Dum Dum <spencerwadetest@gmail.com>",
+        subject: req.params.subject,
+        text: req.params.message
+        }, function(error, response) {
+            if(error) {
+                console.log(error);
+            }
+            else {
+                console.log("Message send: " + response.message);
+            }
+            smtpTransport.close();
+        });
+})
+
+app.post('/send', function(req, res) {
+    console.log(req.body);
+    var from = req.body.sendername+" <"+req.body.from+">";
+    console.log(from);
+    smtpTransport.sendMail({
+        from: from,
+        to: "Dum Dum <spencerwadetest@gmail.com>",
+        subject: req.body.subject,
+        text: req.body.message
+        }, function(error, response) {
+            if(error) {
+                console.log(error);
+            }
+            else {
+                console.log("Message send: " + response.message);
+            }
+            smtpTransport.close();
+        });
+})
+*/
+app.use(function(err,req,res,next) {
+    if(err.status!==404) {
+        return next();
+    }
+    res.render('error');
+})
+
 
 server.listen(8080, function() {
     var host = server.address().address;
