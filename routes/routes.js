@@ -87,6 +87,32 @@ module.exports = function(app, mongoskin, path, passport) {
         });
     });
 
+    
+    //route for sending email
+    app.get('/send',function(req,res) {
+        var query = url.parse(req.url, true).query;
+        var from = query.sendername+" <"+query.from+">";
+        var subject = query.subject;
+        var text = query.message;
+        smtpTransport.sendMail({
+            from: from,
+            to: "Dum Dum <spencerwadetest@gmail.com>",
+            subject: subject,
+            text: text
+        }, function(error, response) {
+            if(error) {
+                console.log(error);
+                res.send(500);
+            }
+            else {
+                res.send(200);
+                console.log("Message send: " + response.message);
+            }
+            smtpTransport.close();
+        });
+    });
+
+
     //the home page
     app.get('/', function(req,res){
         req.collections.art.find({onHome: true}).toArray(function(error, result){
