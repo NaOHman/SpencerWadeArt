@@ -2,10 +2,20 @@
 var formidable = require('formidable');
 var fs = require('fs');
 
-module.exports = function(app, mongoskin, path) {
+module.exports = function(app, mongoskin, path, passport) {
+
+    app.get('/login', function(req, res){
+        res.render('login', {message: req.flash('loginMessage')})
+    });
+
+    app.post('/login', passport.authenticate('local-login', {
+        successRedirect: '/admin',
+        failureRedirect: '/login/',
+        failureFlash: true
+    }));
 
     //route for updating artwork from the admin page
-    app.post('/save', function(req, res){
+    app.post('/save', isLoggedIn, function(req, res){
         var fields = req.body;
         var myId = mongoskin.helper.toObjectID(fields.artId);
         delete(fields.artId);
@@ -16,9 +26,21 @@ module.exports = function(app, mongoskin, path) {
             res.redirect('/admin')
         })
     });
+//	app.get('/signup', function(req, res) {
+//
+//		// render the page and pass in any flash data if it exists
+//		res.render('signup.jade', { message: req.flash('signupMessage') });
+//	});
+//
+//	// process the signup form
+//	app.post('/signup', passport.authenticate('local-signup', {
+//		successRedirect : '/admin',
+//		failureRedirect : '/signup',
+//		failureFlash : true // allow flash messages
+//	}));
 
     //route for removing artwork from the admin page
-    app.post('/remove', function(req, res){
+    app.post('/remove', isLoggedIn, function(req, res){
         myId = mongoskin.helper.toObjectID(req.body.myId);
         imgPath = path.join(__dirname, '../', 'public', req.body.imgPath);
         fs.unlink(imgPath, function(err, fd){
@@ -118,7 +140,7 @@ module.exports = function(app, mongoskin, path) {
     });
 
     //the admin page
-    app.get('/admin', function(req,res){
+    app.get('/admin', isLoggedIn, function(req,res){
         req.collections.art.find({}).toArray(function(error, peices){
             if (error)
                 return next(error);
@@ -163,4 +185,15 @@ module.exports = function(app, mongoskin, path) {
            fields.onHome = false;
         return fields
     }
+};
+
+// route middleware to make sure
+function isLoggedIn(req, res, next) {
+
+	// if user is authenticated in the session, carry on
+	if (req.isAuthenticated())
+		return next();
+
+	// if they aren't redirect them to the home page
+	res.redirect('/');
 }

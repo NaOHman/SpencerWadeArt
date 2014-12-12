@@ -1,0 +1,26 @@
+doctype html
+html
+head
+	title Authentication Example
+body
+	h1 Login
+
+	if message.length > 0
+		div.alert
+			=message
+	
+	form(action="/login" method="post")
+		label Username
+		input(type="text" name="username")
+		label Password
+		input(type="password" name="password")
+		button(type="submit") Login
+
+	p
+		| Need an account?
+		a(href="/signup")
+			| Signup
+	p
+		|Or go
+		a(href="/")
+			| home
