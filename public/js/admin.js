@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var url = 'http://localhost:8080';
+    var url = 'https://localhost:8080';
     $('.remove-btn').on('click', function(event){
         event.preventDefault();
         var id = $(this).attr('data-id').replace(/"/g,'');

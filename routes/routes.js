@@ -5,7 +5,8 @@ var fs = require('fs');
 module.exports = function(app, mongoskin, path, passport) {
 
     app.get('/login', function(req, res){
-        res.render('login', {message: req.flash('loginMessage')})
+        console.log("got here");
+        res.render('login', {message: req.flash('loginMessage')});
     });
 
     app.post('/login', passport.authenticate('local-login', {
@@ -13,6 +14,11 @@ module.exports = function(app, mongoskin, path, passport) {
         failureRedirect: '/login/',
         failureFlash: true
     }));
+
+	app.get('/logout', function(req, res) {
+		req.logout();
+		res.redirect('/');
+	});
 
     //route for updating artwork from the admin page
     app.post('/save', isLoggedIn, function(req, res){
@@ -112,6 +118,9 @@ module.exports = function(app, mongoskin, path, passport) {
         });
     });
 
+    app.get('/edit', isLoggedIn, function(req,res){
+        res.render('edit');
+    });
 
     //the home page
     app.get('/', function(req,res){
@@ -220,6 +229,5 @@ function isLoggedIn(req, res, next) {
 	if (req.isAuthenticated())
 		return next();
 
-	// if they aren't redirect them to the home page
-	res.redirect('/');
+	res.redirect('/login');
 }

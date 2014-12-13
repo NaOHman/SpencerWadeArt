@@ -5,9 +5,9 @@ html
     |     
     title
     |     
-    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+    script(src='https://code.jquery.com/jquery-1.11.0.min.js')
     //if IE
-      | script src=&quot;http://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;
+      | script src=&quot;https://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;
     // Bootstrap
     // Latest compiled and minified CSS
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
@@ -28,18 +28,12 @@ html
           li
             a(href='/')
               span.glyphicon.glyphicon-home
+          li.active
+            a(href='/admin') Manage Artwork
           li
-            a(href='/gallery') Gallery
+            a(href='/edit') Change Info
           li
-            a(href='/technique') About the Art
-          li
-            a(href='/about') About the Artist
-          li
-            a(href='/contact') Contact
-          li
-            a(href='/commission') Commission
-          li
-            a(href='/store') Store
+            a(href='/Logout') Logout
     // Page Content
     .container
       // Page Heading

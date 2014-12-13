@@ -2,9 +2,9 @@ doctype html
 html
   head
     meta(charset='utf-8')
-    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    |     
     title
+    |     
     script(src='https://code.jquery.com/jquery-1.11.0.min.js')
     //if IE
       | script src=&quot;https://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;
@@ -13,33 +13,34 @@ html
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
     // Latest compiled and minified JavaScript
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    script(src='/js/admin.js')
+    |     
     link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
-  body
+  block body
+    - var myMonths = ['---', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Nov','Dec']
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container
         a.brand(href='/')
           img.img-responsive.center-block(src='images/logo.png')
+      |         
       div
         ul.navbar-justice-league.nav.navbar-nav
           li
             a(href='/')
               span.glyphicon.glyphicon-home
           li
-            a(href='/gallery') Gallery
+            a(href='/admin') Manage Artwork
+          li.active
+            a(href='/edit') Change Info
           li
-            a(href='/technique') About the Art
-          li
-            a(href='/about') About the Artist
-          li
-            a(href='/contact') Contact
-          li
-            a(href='/commission') Commission
-          li
-            a(href='/store') Store
-    .container
-      p OH NOES!
-      br
-      iframe.embed-responsive-item(width='420', height='315', src='http://stream1.gifsoup.com/view5/3996342/shocked-cat-o.gif', frameborder='0', allowfullscreen='')
-      br
-      p This feature hasn&apos;t been implemented yet!
-      p Coming soon!
+            a(href='/logout') Logout
+    // Page Content
+    h2 Profile Pic
+    h2 Video Link
+    h2 Email
+    h2 Phone number
+    h2 Header Picture
+    h2 Front Page text
+    h2 About the artwork
+    h2 Bio
+    h2 Inspiration

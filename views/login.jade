@@ -1,26 +1,57 @@
 doctype html
 html
-head
-	title Authentication Example
-body
-	h1 Login
+  head
+    meta(charset='utf-8')
+    title
+    script(src='https://code.jquery.com/jquery-1.11.0.min.js')
+    //if IE
+      | script src=&quot;https://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;
+    // Bootstrap
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
+    // Latest compiled and minified JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        a.brand(href='/')
+          img.img-responsive.center-block(src='images/logo.png')
+      div
+        ul.navbar-justice-league.nav.navbar-nav
+          li
+            a(href='/')
+              span.glyphicon.glyphicon-home
+          li
+            a(href='/gallery') Gallery
+          li
+            a(href='/technique') About the Art
+          li
+            a(href='/about') About the Artist
+          li
+            a(href='/contact') Contact
+          li
+            a(href='/commission') Commission
+          li
+            a(href='/store') Store
 
-	if message.length > 0
-		div.alert
-			=message
-	
-	form(action="/login" method="post")
-		label Username
-		input(type="text" name="username")
-		label Password
-		input(type="password" name="password")
-		button(type="submit") Login
+    h1.text-center Login
 
-	p
-		| Need an account?
-		a(href="/signup")
-			| Signup
-	p
-		|Or go
-		a(href="/")
-			| home
+    if message.length > 0
+        div.alert
+            =message
+    
+    .text-center
+        form(role='form' action="/login" method="post")
+            .row
+                label Username
+                input(type="text" name="username")
+            .ros
+                label Password
+                input(type="password" name="password")
+            .row 
+                button.btn.btn-default(type="submit") Login
+        p
+            |Lost? 
+            a(href="/")
+                | Go back to the home page

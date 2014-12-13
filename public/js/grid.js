@@ -150,7 +150,7 @@ $.fn.imagesLoaded = function( callback ) {
 
 			// cached images don't fire load sometimes, so we reset src, but only when
 			// dealing with IE, or image is complete (loaded) and failed manual check
-			// webkit hack from http://groups.google.com/group/jquery-dev/browse_thread/thread/eee6ab7b2da50e1f
+			// webkit hack from https://groups.google.com/group/jquery-dev/browse_thread/thread/eee6ab7b2da50e1f
 			if ( el.readyState || el.complete ) {
 				el.src = BLANK;
 				el.src = src;

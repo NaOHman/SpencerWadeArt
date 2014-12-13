@@ -52,14 +52,17 @@ app.use(logger('dev'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', ensureSecure);
+app.use('/edit', ensureSecure);
 app.use('/upload', ensureSecure);
 app.use('/save', ensureSecure);
 app.use('/remove', ensureSecure);
-app.use('/signup', ensureSecure);
+app.use('/login', ensureSecure);
 
 function ensureSecure(req, res, next){
-    if (req.secure)
+    if (req.secure) {
+        console.log('is secure');
         next();
+    }
     else 
         res.redirect('https://' + req.headers.host + '/login')
 }

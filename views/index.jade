@@ -3,9 +3,9 @@ html
   head
     meta(charset='utf-8')
     title
-    script(src='http://code.jquery.com/jquery-1.11.0.min.js')
+    script(src='https://code.jquery.com/jquery-1.11.0.min.js')
     //if IE
-      | script src='http://html5shiv.googlecode.com/svn/trunk/html5.js')
+      | script src='https://html5shiv.googlecode.com/svn/trunk/html5.js')
     // Bootstrap
     // Latest compiled and minified CSS
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
@@ -13,11 +13,12 @@ html
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
     script(type='text/javascript', src='/js/jquery.jcarousel.min.js')
     script(type='text/javascript', src='/js/jcarousel.responsive.js')
+    script(type='text/javascript', src='/js/index.js')
     link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
   body
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container
-      a.brand(href='/')
+      .brand#banner
         img.img-responsive.center-block(src='images/logo.png')
       div
         ul.navbar-justice-league.nav.navbar-nav

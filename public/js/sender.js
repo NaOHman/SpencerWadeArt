@@ -11,7 +11,7 @@ var sendEmail = function() {
 		subject=$("#subject").val();
 		message=$("#message").val();
 		//TODO need some kind of url variable not hardcoded
-		var url = "http://localhost:8080/send";
+		var url = "https://localhost:8080/send";
 		$.ajax({
 			url: url,
 			type: 'GET',
