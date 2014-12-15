@@ -18,8 +18,8 @@ html
   body
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container
-      .brand#banner
-        img.img-responsive.center-block(src='images/logo.png')
+      #banner
+        img.center-block(src='images/logo' height='100')
       div
         ul.navbar-justice-league.nav.navbar-nav
           li.active
@@ -46,27 +46,11 @@ html
                 each val in pictures
                   li
                     img(src=val.imgsrc, alt=val.title)
-            |                 
             a.jcarousel-control-prev(href='#') &lsaquo;
-            |                 
             a.jcarousel-control-next(href='#') &rsaquo;
-            |                 
             p.jcarousel-pagination
-      | &#x9;
       .row
         .col-1
           .container
             h5
-              | Welcome to Spencer Wade Art! Feel free to explore the website for the amazing colorblind artist! If you are intersted in browsing Spencer&apos;s many paintings, take a look at the 
-              a(href='/gallery.html') gallery
-              | . Interested in learnig more about this unique art? Check out our 
-              a(href='/technique.html') about the art
-              |  page! Curious who the mysterious Spencer Wade is? Read 
-              a(href='/about.html') this
-              |  for his biography and inspirations. Want to contact Spencer? We have a 
-              a(href='/contact.html') page
-              |  for that, too! If you know what you want, feel free to make a 
-              a(href='/comission.html') comission
-              | . Want to buy a specific painting? Try out the 
-              a(href='/store.html') store
-              | ! Literally click any of those links or the nav bar on top and stop reading this dumb flavor text. Please.
+              !{frontpagetext.text}

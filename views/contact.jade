@@ -16,8 +16,8 @@ html
   body
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container
-        a.brand(href='/')
-          img.img-responsive.center-block(src='images/logo.png')
+        a(href='/')
+          img.center-block(src='images/logo' height='100')
       div
         ul.navbar-justice-league.nav.navbar-nav
           li
@@ -38,42 +38,30 @@ html
     .container-fluid
       .col-xs-8
         h2.text-center Send me a message
-        |        
         form#contact-form.form-horizontal(onSubmit="sendEmail(); return false;") 
           .form-group
             label.col-sm-2.control-label(for='name') Name
-            |                     
             .col-sm-10
               input#sendername.form-control(name='sendername', type='text')
-          |                 
           .form-group
             label.col-sm-2.control-label(for='email') Email Address
-            |                     
             .col-sm-10
               input#from.form-control(name='from', type='text')
-          |                 
           .form-group
             label.col-sm-2.control-label(for='subject') Subject
-            |                     
             .col-sm-10
               input#subject.form-control(name='subject', type='text')
-          |                 
           .form-group
             label.col-sm-2.control-label(for='message') Message
-            |                     
             .col-sm-10
               textarea#message.form-control(rows='5', name='message')
-              |                         
               button.btn.btn-default.btn-block(type='submit') Send
-      |         
       .cols-xs-4
         h2.text-center Want to commission a piece of artwork?
-        |             
         p.text-center
           | Checkout out the 
           a(href='/commission') Commission page
-        |             
         img.center-block(src='images/phone.png', alt='phone')
-        |             
-        p.text-center ###.###.####
+        p.text-center 
+            =infos.phone
         p

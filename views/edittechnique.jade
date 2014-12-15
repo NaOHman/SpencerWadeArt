@@ -13,12 +13,12 @@ html
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
     script(src='/js/sections.js')
     script
-        | var sections = 0
+        | var sections = "!{n}";
     link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container
-        a.brand(href='/')
-          img.img-responsive.center-block(src='images/logo.png')
+        a(href='/')
+          img.center-block(src='images/logo' height='100')
       |         
       div
         ul.navbar-justice-league.nav.navbar-nav
@@ -41,17 +41,22 @@ html
         form(role='form' method='post', action='edittechnique')
             .col-sm-4
                 .embed-responsive.embed-responsive-16by9
-                    iframe.embed-responsive-item(width='420', height='315', src='https://www.youtube.com/embed/ZZ5LpwO-An4?rel=0&showinfo=0', allowfullscreen='')
+                    iframe.embed-responsive-item(width='420', height='315', src=infos.videourl, allowfullscreen)
                 label.control-label(for='videourl') Video Url
                 span.required *
-                input(type='textbox', name='videourl' value='https://www.youtube.com/embed/ZZ5LpwO-An4?rel=0&showinfo=0' required)
+                input(type='textbox', name='videourl' value=infos.videourl required)
             .col-sm-6
                 #sections
-                    .section#0
-                        input.form-control(name='heading0' value="Making the Magic")
-                        textarea.form-control(rows=7, name='text0')
-                            | Spencer works in a basement in the light of a single window and the all the lamps that that his housemates leave down there. Sometimes when he hits a roadblock in his painting he sits down for a good session of shoot the nazis or skyrim. He doesn't like to cut his oil paints which means that they don't last as long but it produces more vibrant colors and lets him play with things like texture
-                            | There's also some other cool things that Spencer does that makes his art cool and unique and things and stuff. In general Spencer uses paintbrushes to put paint on canvases.
+                    each val, index in infos.sections
+                        .section(id=index)
+                            .input-group
+                                input.form-control(name='heading'+index required value=val.heading)
+                                .input-group-btn
+                                    button.remove-btn.btn.btn-default(type='button' title='Remove section')
+                                        span.glyphicon.glyphicon-remove
+                            textarea.form-control(rows=7, required name='text'+index)
+                                =val.text
+
                 button#add-btn.btn.btn-default(type='button' title='Add a section')
                     span.glyphicon.glyphicon-plus
                 button.btn.btn-primary(type='submit') Save Changes

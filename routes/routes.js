@@ -32,6 +32,40 @@ module.exports = function(app, mongoskin, path, passport) {
             res.redirect('/admin')
         })
     });
+
+    app.post('/contactinfo', isLoggedIn, function(req, res){
+        req.collections.infos.update({role: 'contact'},
+            {$set : req.body},
+            {upsert: true}, 
+            function(err, response){
+                if (err)
+                    next(err);
+                res.redirect('/edit');
+            }
+        );
+    });
+
+    app.post('/logo', isLoggedIn, function(req, res){
+        var form = new formidable.IncomingForm();
+        form.parse(req, function(err, fields, files) {
+            //`file` is the name of the <input> field of type `file`
+            var old_path = files.fileUpload.path,
+            new_path = path.join(__dirname,'../', 'public','images', 'logo');
+            fs.readFile(old_path, function(err, data) {
+                fs.writeFile(new_path, data, function(err) {
+                    fs.unlink(old_path, function(err) {
+                        if (err) {
+                            res.status(500);
+                            res.json({'success': false});
+                        } else {
+                            res.redirect('/edit');
+                        }
+                    });
+                });
+            });
+        });
+    });
+
     app.post('/editbio', isLoggedIn, function(req, res){
         var form = new formidable.IncomingForm();
         form.parse(req, function(err, fields, files) {
@@ -76,8 +110,29 @@ module.exports = function(app, mongoskin, path, passport) {
         });
     });
 
-    app.post('/edittechnique', isLoggedIn, function(req, res){
+    app.post('/frontpagetext', isLoggedIn, function(req, res){
+        req.collections.infos.update({role: 'frontpagetext'},
+            {$set : {text: req.body.frontpagetext}},
+            {upsert: true}, 
+            function(err, response){
+                if (err)
+                    next(err);
+                res.redirect('/edit');
+            }
+        );
+    });
 
+    app.post('/edittechnique', isLoggedIn, function(req, res){
+        req.collections.infos.update({role: 'technique'},
+            {$set : {sections: fieldsToArray(req.body),
+                     videourl: req.body.videourl}},
+            {upsert: true}, 
+            function(err, response){
+                if (err)
+                    next(err);
+                res.redirect('/edittechnique');
+            }
+        );
     });
 //	app.get('/signup', function(req, res) {
 //
@@ -165,7 +220,16 @@ module.exports = function(app, mongoskin, path, passport) {
     });
 
     app.get('/edit', isLoggedIn, function(req,res){
-        res.render('edit');
+        req.collections.infos.findOne({role: 'contact'}, function(error, contactData){
+            if (error)
+                return next(error);
+            req.collections.infos.findOne({role: 'frontpagetext'}, function(error, frontpagedata){
+                if (error)
+                    return next(error);
+                res.render('edit', {contact: contactData,
+                                    frontpagetext: frontpagedata});
+            });
+        });
     });
 
     app.get('/editbio', isLoggedIn, function(req,res){
@@ -179,14 +243,24 @@ module.exports = function(app, mongoskin, path, passport) {
     });
 
     app.get('/edittechnique', isLoggedIn, function(req,res){
-        res.render('edittechnique');
+        req.collections.infos.findOne({role: 'technique'}, function(error, result){
+            if (error)
+                return next(error);
+            sections = result.sections.length -1;
+            res.render('edittechnique', {infos: result,
+                                   n: sections});
+        });
     });
+
     //the home page
     app.get('/', function(req,res){
         req.collections.art.find({onHome: true}).toArray(function(error, result){
-            if (error)
-                return next(error);
-            res.render('index', {pictures: result});
+            req.collections.infos.findOne({role: 'frontpagetext'}, function(error, frontpagedata){
+                if (error)
+                    return next(error);
+                res.render('index', {pictures: result,
+                                    frontpagetext: frontpagedata});
+            });
         });
     });
 
@@ -195,14 +269,17 @@ module.exports = function(app, mongoskin, path, passport) {
         req.collections.infos.findOne({role: 'bio'}, function(error, result){
             if (error)
                 return next(error);
-            sections = result.sections.length -1;
             res.render('about', {infos: result});
         });
     })
 
     //the technique page
     app.get('/technique', function(req,res){
-        res.render('technique', null)
+        req.collections.infos.findOne({role: 'technique'}, function(error, result){
+            if (error)
+                return next(error);
+            res.render('technique', {infos: result,});
+        });
     })
 
     //the store page
@@ -230,7 +307,11 @@ module.exports = function(app, mongoskin, path, passport) {
 
     //the contact page
     app.get('/contact', function(req,res){
-        res.render('contact', null)
+        req.collections.infos.findOne({role: 'contact'}, function(error, result){
+            if (error)
+                return next(error);
+            res.render('contact', {infos: result,});
+        });
     });
 
     //the commission page

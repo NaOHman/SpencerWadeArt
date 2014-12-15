@@ -15,8 +15,8 @@ html
   body
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container
-        a.brand(href='/')
-          img.img-responsie.center-block(src='images/logo.png')
+        a(href='/')
+          img.img-responsie.center-block(src='images/logo' height='100')
       div
         ul.navbar-justice-league.nav.navbar-nav
           li
@@ -40,6 +40,6 @@ html
       #bio.col-xs-8
         each val in infos.sections
             h2 
-                =val.heading
+                !{val.heading}
             p
-                =val.text
+                !{val.text}

@@ -16,8 +16,8 @@ html
     link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container
-        a.brand(href='/')
-          img.img-responsive.center-block(src='images/logo.png')
+        a(href='/')
+          img.center-block(src='images/logo' height='100')
       |         
       div
         ul.navbar-justice-league.nav.navbar-nav
@@ -38,32 +38,33 @@ html
     .container
         .col-sm-6
             h2 Change Site Header
-            form(role='form' enctype="multipart/form-data", method='post', action='logo')
+            h4 For best results, image should be about 100px tall
+            form(role='form' enctype="multipart/form-data", method='post', action='logo' height='100')
                 label.control-label(for='fileUpload') Upload Image
                 span.required *
                 input(type='file', name='fileUpload', required)
-                img.img-responsive.center-block(src='images/logo')
+                img.center-block(src='images/logo' height='100')
                 button.btn.btn-primary(type='submit') Save
          .col-sm-6
             h2 Change Contact info
-            form(role='form', method='post', action='contact')
+            form(role='form', method='post', action='contactinfo')
                 .row
                     .col-sm-6
-                        label.control-label(for='fileUpload') Email Address
+                        label.control-label(for='email') Email Address
                         span.required *
                     .col-sm-6
-                        input.form-control(type='textbox' name='email' value='someEmail' required)
+                        input.form-control(type='textbox' name='email' value=contact.email required)
                 .row
                     .col-sm-6
-                        label.control-label(for='fileUpload') Phone Number
+                        label.control-label(for='phone') Phone Number
                         span.required *
                     .col-sm-6
-                        input.form-control(type='textbox' name='phone' value='555-555-5555' required)
+                        input.form-control(type='textbox' name='phone' value=contact.phone required)
                 .row
                     button.btn.btn-primary(type='submit') Save
     .container
         h2 Change Front Page Text
-        form(role='form' method='post' action='info')
+        form(role='form' method='post' action='frontpagetext')
             textarea.form-control(rows=7 name='frontpagetext')
-                |Welcome to Spencer Wade Art! Feel free to explore the website for the amazing colorblind artist! If you are intersted in browsing Spencer's many paintings, take a look at the gallery. Interested in learnig more about this unique art? Check out our about the art page! Curious who the mysterious Spencer Wade is? Read this for his biography and inspirations. Want to contact Spencer? We have a page for that, too! If you know what you want, feel free to make a comission. Want to buy a specific painting? Try out the store! Literally click any of those links or the nav bar on top and stop reading this dumb flavor text. Please.
+                =frontpagetext.text
             button.btn.btn-primary(type='submit') Save
