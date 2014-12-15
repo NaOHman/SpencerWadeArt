@@ -13,12 +13,14 @@ html
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
     // Latest compiled and minified JavaScript
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    script
+        | var picture = !{art};
     link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
   body
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container
         a(href='/')
-          img.center-block(src='images/logo' height='100')
+          img.img-responsie.center-block(src='images/logo' height='100')
       div
         ul.navbar-justice-league.nav.navbar-nav
           li
@@ -28,7 +30,7 @@ html
             a(href='/gallery') Gallery
           li
             a(href='/technique') About the Art
-          li
+          li.active
             a(href='/about') About the Artist
           li
             a(href='/contact') Contact

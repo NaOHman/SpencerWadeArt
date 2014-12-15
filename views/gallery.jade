@@ -50,7 +50,7 @@ html
         ul#og-grid.og-grid
           each val in pictures
             li
-              a(href='/checkout', data-largesrc=val.imgsrc, data-title=val.title, data-description=val.description)
+              a(href='/checkout?picid='+val._id, data-largesrc=val.imgsrc, data-title=val.title, data-description=val.description)
                 img(src=val.imgsrc, alt=val.alt, height=250)
     // /container
     script(src='js/grid.js')
