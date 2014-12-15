@@ -1,6 +1,7 @@
 //used to parse image uploads
 var formidable = require('formidable');
 var fs = require('fs');
+var stripe = require("stripe")("sk_test_okcgo9jT6TRRex0C8KQWifw8");
 
 module.exports = function(app, mongoskin, path, passport) {
     //GET ROUTES
@@ -106,6 +107,12 @@ module.exports = function(app, mongoskin, path, passport) {
         res.render('login', {message: req.flash('loginMessage')});
     });
 
+    app.post('/login', passport.authenticate('local-login', {
+        successRedirect: '/admin',
+        failureRedirect: '/login/',
+        failureFlash: true
+    }));
+
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
@@ -152,9 +159,43 @@ module.exports = function(app, mongoskin, path, passport) {
             res.render('technique', {infos: result,});
         });
     })
+   //Stripe payment
+    app.post('/charge', function(req, res) {
+
+    var stripeToken = req.body.stripeToken;
+
+    var charge = stripe.charges.create({
+        amount: 1000, // amount in cents, again
+        currency: "usd",
+        card: stripeToken,
+        description: "payinguser@example.com"
+    }, function(err, charge) {
+        if (err && err.type === 'StripeCardError') {
+            // The card has been declined
+        } else {
+            //Render a thank you page called "Charge"
+            res.render('charge', { title: 'Charge' });
+        }
+    });
+
+    app.get('/charge', function(req,res){
+        res.render('charge', null)
+    });
    
     //POST routes
     //route for updating artwork from the admin page
+    app.post('/save', isLoggedIn, function(req, res){
+        var fields = req.body;
+        var myId = mongoskin.helper.toObjectID(fields.artId);
+        delete(fields.artId);
+        fields = formToDB(fields);
+        req.collections.art.update({_id: myId},{$set: fields}, function(err, response){
+            if (err)
+                console.log(err);
+            res.redirect('/admin')
+        })
+    });
+
     app.post('/contactinfo', isLoggedIn, function(req, res){
         req.collections.infos.update({role: 'contact'},
             {$set : req.body},
@@ -165,6 +206,27 @@ module.exports = function(app, mongoskin, path, passport) {
                 res.redirect('/edit');
             }
         );
+    });
+
+    app.post('/logo', isLoggedIn, function(req, res){
+        var form = new formidable.IncomingForm();
+        form.parse(req, function(err, fields, files) {
+            //`file` is the name of the <input> field of type `file`
+            var old_path = files.fileUpload.path,
+            new_path = path.join(__dirname,'../', 'public','images', 'logo');
+            fs.readFile(old_path, function(err, data) {
+                fs.writeFile(new_path, data, function(err) {
+                    fs.unlink(old_path, function(err) {
+                        if (err) {
+                            res.status(500);
+                            res.json({'success': false});
+                        } else {
+                            res.redirect('/edit');
+                        }
+                    });
+                });
+            });
+        });
     });
 
     app.post('/editbio', isLoggedIn, function(req, res){
@@ -330,6 +392,7 @@ function monthToN(month){
 
     //performs transformations on the form data so that
     //the database contains more useful information
+};
 function formToDB(fields){
     fields.medium = fields.medium.charAt(0).toUpperCase() + fields.medium.slice(1).toLowerCase();
     fields.alt = fields.title;

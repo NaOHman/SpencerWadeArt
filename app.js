@@ -6,6 +6,7 @@ var url = require('url');
 var logger = require('morgan');
 var nodemailer = require("nodemailer");
 var bodyParser = require("body-parser");
+var stripe = require("stripe")("sk_test_okcgo9jT6TRRex0C8KQWifw8");
 var fs = require('fs');
 var app = express();
 
@@ -69,6 +70,7 @@ function ensureSecure(req, res, next){
     else 
         res.redirect('https://' + req.headers.host + '/login')
 }
+
 
 require('./modules/authentication')(passport); // pass passport for configuration
 require('./routes/routes.js')(app, mongoskin, path, passport);
