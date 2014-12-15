@@ -24,7 +24,7 @@ module.exports = function(app, mongoskin, path, passport) {
                 return next(error);
             res.render('about', {infos: result});
         });
-    })
+    });
 
     //the admin page
     app.get('/admin', isLoggedIn, function(req,res){
@@ -38,7 +38,7 @@ module.exports = function(app, mongoskin, path, passport) {
     //the checkout page
     app.get('/checkout', function(req,res){
         res.render('checkout', null)
-    })
+    });
 
     //the commission page
     app.get('/commission', function(req,res){
@@ -161,21 +161,20 @@ module.exports = function(app, mongoskin, path, passport) {
     })
    //Stripe payment
     app.post('/charge', function(req, res) {
-
-    var stripeToken = req.body.stripeToken;
-
-    var charge = stripe.charges.create({
-        amount: 1000, // amount in cents, again
-        currency: "usd",
-        card: stripeToken,
-        description: "payinguser@example.com"
-    }, function(err, charge) {
-        if (err && err.type === 'StripeCardError') {
-            // The card has been declined
-        } else {
-            //Render a thank you page called "Charge"
-            res.render('charge', { title: 'Charge' });
-        }
+        var stripeToken = req.body.stripeToken;
+        var charge = stripe.charges.create({
+            amount: 1000, // amount in cents, again
+            currency: "usd",
+            card: stripeToken,
+            description: "payinguser@example.com"
+        }, function(err, charge) {
+            if (err && err.type === 'StripeCardError') {
+                // The card has been declined
+            } else {
+                //Render a thank you page called "Charge"
+                res.render('charge', { title: 'Charge' });
+            }
+        });
     });
 
     app.get('/charge', function(req,res){
