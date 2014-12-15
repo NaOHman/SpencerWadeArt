@@ -389,9 +389,8 @@ function monthToN(month){
     return ['---','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Nov','Dec'].indexOf(month);
 }
 
-    //performs transformations on the form data so that
-    //the database contains more useful information
-};
+//performs transformations on the form data so that
+//the database contains more useful information
 function formToDB(fields){
     fields.medium = fields.medium.charAt(0).toUpperCase() + fields.medium.slice(1).toLowerCase();
     fields.alt = fields.title;
