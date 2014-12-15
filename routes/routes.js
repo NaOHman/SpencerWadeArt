@@ -1,6 +1,7 @@
 //used to parse image uploads
 var formidable = require('formidable');
 var fs = require('fs');
+var stripe = require("stripe")("sk_test_okcgo9jT6TRRex0C8KQWifw8");
 
 module.exports = function(app, mongoskin, path, passport) {
 
@@ -293,7 +294,7 @@ module.exports = function(app, mongoskin, path, passport) {
 
     //the checkout page
     app.get('/checkout', function(req,res){
-        res.render('checkout', null)
+        res.render('checkout', { item: })
     })
 
     //the gallery page
@@ -332,6 +333,31 @@ module.exports = function(app, mongoskin, path, passport) {
     app.get('/error', function(req,res){
         res.render('error', null)
     });
+
+    //Stripe payment
+    app.post('/charge', function(req, res) {
+
+    var stripeToken = req.body.stripeToken;
+
+    var charge = stripe.charges.create({
+        amount: 1000, // amount in cents, again
+        currency: "usd",
+        card: stripeToken,
+        description: "payinguser@example.com"
+    }, function(err, charge) {
+        if (err && err.type === 'StripeCardError') {
+            // The card has been declined
+        } else {
+            //Render a thank you page called "Charge"
+            res.render('charge', { title: 'Charge' });
+        }
+    });
+
+    app.get('/charge', function(req,res){
+        res.render('charge', null)
+    });
+
+});
 
     //required to make sorting by date work properly
     function monthToN(month){
