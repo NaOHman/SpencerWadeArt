@@ -294,7 +294,7 @@ module.exports = function(app, mongoskin, path, passport) {
 
     //the checkout page
     app.get('/checkout', function(req,res){
-        res.render('checkout', { item: })
+        res.render('checkout', null)
     })
 
     //the gallery page
