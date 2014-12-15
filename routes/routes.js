@@ -3,36 +3,158 @@ var formidable = require('formidable');
 var fs = require('fs');
 
 module.exports = function(app, mongoskin, path, passport) {
+    //GET ROUTES
+    //the home page
+    app.get('/', function(req,res){
+        req.collections.art.find({onHome: true}).toArray(function(error, result){
+            req.collections.infos.findOne({role: 'frontpagetext'}, function(error, frontpagedata){
+                if (error)
+                    return next(error);
+                res.render('index', {pictures: result,
+                                    frontpagetext: frontpagedata});
+            });
+        });
+    });
+
+   //the about page
+    app.get('/about', function(req,res){
+        req.collections.infos.findOne({role: 'bio'}, function(error, result){
+            if (error)
+                return next(error);
+            res.render('about', {infos: result});
+        });
+    })
+
+    //the admin page
+    app.get('/admin', isLoggedIn, function(req,res){
+        req.collections.art.find({}).toArray(function(error, peices){
+            if (error)
+                return next(error);
+            res.render('admin', {pictures: peices});
+        });
+    });
+
+    //the checkout page
+    app.get('/checkout', function(req,res){
+        res.render('checkout', null)
+    })
+
+    //the commission page
+    app.get('/commission', function(req,res){
+        res.render('commission', null)
+    });
+
+
+    //the contact page
+    app.get('/contact', function(req,res){
+        req.collections.infos.findOne({role: 'contact'}, function(error, result){
+            if (error)
+                return next(error);
+            res.render('contact', {infos: result,});
+        });
+    });
+
+    app.get('/edit', isLoggedIn, function(req,res){
+        req.collections.infos.findOne({role: 'contact'}, function(error, contactData){
+            if (error)
+                return next(error);
+            req.collections.infos.findOne({role: 'frontpagetext'}, function(error, frontpagedata){
+                if (error)
+                    return next(error);
+                res.render('edit', {contact: contactData,
+                                    frontpagetext: frontpagedata});
+            });
+        });
+    });
+
+    app.get('/editbio', isLoggedIn, function(req,res){
+        req.collections.infos.findOne({role: 'bio'}, function(error, result){
+            if (error)
+                return next(error);
+            sections = result.sections.length -1;
+            res.render('editbio', {infos: result,
+                                   n: sections});
+        });
+    });
+
+    app.get('/edittechnique', isLoggedIn, function(req,res){
+        req.collections.infos.findOne({role: 'technique'}, function(error, result){
+            if (error)
+                return next(error);
+            sections = result.sections.length -1;
+            res.render('edittechnique', {infos: result,
+                                   n: sections});
+        });
+    });
+ 
+    //something went wrong
+    app.get('/error', function(req,res){
+        res.render('error', null)
+    });
+
+    //the gallery page
+    app.get('/gallery', function(req,res){
+        req.collections.art.find({}).toArray(function(error, result){
+            if (error)
+                return next(error);
+            res.render('gallery', {pictures: result});
+        });
+    });
 
     app.get('/login', function(req, res){
         console.log("got here");
         res.render('login', {message: req.flash('loginMessage')});
     });
 
-    app.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/admin',
-        failureRedirect: '/login/',
-        failureFlash: true
-    }));
-
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
 	});
-
-    //route for updating artwork from the admin page
-    app.post('/save', isLoggedIn, function(req, res){
-        var fields = req.body;
-        var myId = mongoskin.helper.toObjectID(fields.artId);
-        delete(fields.artId);
-        fields = formToDB(fields);
-        req.collections.art.update({_id: myId},{$set: fields}, function(err, response){
-            if (err)
-                console.log(err);
-            res.redirect('/admin')
-        })
+        
+    //route for sending email
+    app.get('/send',function(req,res) {
+        var query = url.parse(req.url, true).query;
+        var from = query.sendername+" <"+query.from+">";
+        var subject = query.subject;
+        var text = query.message;
+        smtpTransport.sendMail({
+            from: from,
+            to: "Dum Dum <spencerwadetest@gmail.com>",
+            subject: subject,
+            text: text
+        }, function(error, response) {
+            if(error) {
+                console.log(error);
+                res.send(500);
+            }
+            else {
+                res.send(200);
+                console.log("Message send: " + response.message);
+            }
+            smtpTransport.close();
+        });
     });
 
+    //the store page
+    app.get('/store', function(req,res){
+        req.collections.art.find({forSale: true}).toArray(function(error, peices){
+            if (error)
+                return next(error);
+            res.render('store', {pictures: peices});
+        });
+    })
+
+    //the technique page
+    app.get('/technique', function(req,res){
+        req.collections.infos.findOne({role: 'technique'}, function(error, result){
+            if (error)
+                return next(error);
+            res.render('technique', {infos: result,});
+        });
+    })
+   
+    //POST routes
+    //route for updating artwork from the admin page
     app.post('/contactinfo', isLoggedIn, function(req, res){
         req.collections.infos.update({role: 'contact'},
             {$set : req.body},
@@ -43,27 +165,6 @@ module.exports = function(app, mongoskin, path, passport) {
                 res.redirect('/edit');
             }
         );
-    });
-
-    app.post('/logo', isLoggedIn, function(req, res){
-        var form = new formidable.IncomingForm();
-        form.parse(req, function(err, fields, files) {
-            //`file` is the name of the <input> field of type `file`
-            var old_path = files.fileUpload.path,
-            new_path = path.join(__dirname,'../', 'public','images', 'logo');
-            fs.readFile(old_path, function(err, data) {
-                fs.writeFile(new_path, data, function(err) {
-                    fs.unlink(old_path, function(err) {
-                        if (err) {
-                            res.status(500);
-                            res.json({'success': false});
-                        } else {
-                            res.redirect('/edit');
-                        }
-                    });
-                });
-            });
-        });
     });
 
     app.post('/editbio', isLoggedIn, function(req, res){
@@ -110,18 +211,6 @@ module.exports = function(app, mongoskin, path, passport) {
         });
     });
 
-    app.post('/frontpagetext', isLoggedIn, function(req, res){
-        req.collections.infos.update({role: 'frontpagetext'},
-            {$set : {text: req.body.frontpagetext}},
-            {upsert: true}, 
-            function(err, response){
-                if (err)
-                    next(err);
-                res.redirect('/edit');
-            }
-        );
-    });
-
     app.post('/edittechnique', isLoggedIn, function(req, res){
         req.collections.infos.update({role: 'technique'},
             {$set : {sections: fieldsToArray(req.body),
@@ -134,18 +223,45 @@ module.exports = function(app, mongoskin, path, passport) {
             }
         );
     });
-//	app.get('/signup', function(req, res) {
-//
-//		// render the page and pass in any flash data if it exists
-//		res.render('signup.jade', { message: req.flash('signupMessage') });
-//	});
-//
-//	// process the signup form
-//	app.post('/signup', passport.authenticate('local-signup', {
-//		successRedirect : '/admin',
-//		failureRedirect : '/signup',
-//		failureFlash : true // allow flash messages
-//	}));
+   
+    app.post('/frontpagetext', isLoggedIn, function(req, res){
+        req.collections.infos.update({role: 'frontpagetext'},
+            {$set : {text: req.body.frontpagetext}},
+            {upsert: true}, 
+            function(err, response){
+                if (err)
+                    next(err);
+                res.redirect('/edit');
+            }
+        );
+    });
+
+    app.post('/login', passport.authenticate('local-login', {
+        successRedirect: '/admin',
+        failureRedirect: '/login/',
+        failureFlash: true
+    }));
+
+    app.post('/logo', isLoggedIn, function(req, res){
+        var form = new formidable.IncomingForm();
+        form.parse(req, function(err, fields, files) {
+            //`file` is the name of the <input> field of type `file`
+            var old_path = files.fileUpload.path,
+            new_path = path.join(__dirname,'../', 'public','images', 'logo');
+            fs.readFile(old_path, function(err, data) {
+                fs.writeFile(new_path, data, function(err) {
+                    fs.unlink(old_path, function(err) {
+                        if (err) {
+                            res.status(500);
+                            res.json({'success': false});
+                        } else {
+                            res.redirect('/edit');
+                        }
+                    });
+                });
+            });
+        });
+    });
 
     //route for removing artwork from the admin page
     app.post('/remove', isLoggedIn, function(req, res){
@@ -159,6 +275,18 @@ module.exports = function(app, mongoskin, path, passport) {
             if (err)
                 console.log(err);
             res.send({success: true});
+        })
+    });
+
+    app.post('/save', isLoggedIn, function(req, res){
+        var fields = req.body;
+        var myId = mongoskin.helper.toObjectID(fields.artId);
+        delete(fields.artId);
+        fields = formToDB(fields);
+        req.collections.art.update({_id: myId},{$set: fields}, function(err, response){
+            if (err)
+                console.log(err);
+            res.redirect('/admin')
         })
     });
 
@@ -193,154 +321,15 @@ module.exports = function(app, mongoskin, path, passport) {
             });
         });
     });
+};
 
-    
-    //route for sending email
-    app.get('/send',function(req,res) {
-        var query = url.parse(req.url, true).query;
-        var from = query.sendername+" <"+query.from+">";
-        var subject = query.subject;
-        var text = query.message;
-        smtpTransport.sendMail({
-            from: from,
-            to: "Dum Dum <spencerwadetest@gmail.com>",
-            subject: subject,
-            text: text
-        }, function(error, response) {
-            if(error) {
-                console.log(error);
-                res.send(500);
-            }
-            else {
-                res.send(200);
-                console.log("Message send: " + response.message);
-            }
-            smtpTransport.close();
-        });
-    });
-
-    app.get('/edit', isLoggedIn, function(req,res){
-        req.collections.infos.findOne({role: 'contact'}, function(error, contactData){
-            if (error)
-                return next(error);
-            req.collections.infos.findOne({role: 'frontpagetext'}, function(error, frontpagedata){
-                if (error)
-                    return next(error);
-                res.render('edit', {contact: contactData,
-                                    frontpagetext: frontpagedata});
-            });
-        });
-    });
-
-    app.get('/editbio', isLoggedIn, function(req,res){
-        req.collections.infos.findOne({role: 'bio'}, function(error, result){
-            if (error)
-                return next(error);
-            sections = result.sections.length -1;
-            res.render('editbio', {infos: result,
-                                   n: sections});
-        });
-    });
-
-    app.get('/edittechnique', isLoggedIn, function(req,res){
-        req.collections.infos.findOne({role: 'technique'}, function(error, result){
-            if (error)
-                return next(error);
-            sections = result.sections.length -1;
-            res.render('edittechnique', {infos: result,
-                                   n: sections});
-        });
-    });
-
-    //the home page
-    app.get('/', function(req,res){
-        req.collections.art.find({onHome: true}).toArray(function(error, result){
-            req.collections.infos.findOne({role: 'frontpagetext'}, function(error, frontpagedata){
-                if (error)
-                    return next(error);
-                res.render('index', {pictures: result,
-                                    frontpagetext: frontpagedata});
-            });
-        });
-    });
-
-    //the about page
-    app.get('/about', function(req,res){
-        req.collections.infos.findOne({role: 'bio'}, function(error, result){
-            if (error)
-                return next(error);
-            res.render('about', {infos: result});
-        });
-    })
-
-    //the technique page
-    app.get('/technique', function(req,res){
-        req.collections.infos.findOne({role: 'technique'}, function(error, result){
-            if (error)
-                return next(error);
-            res.render('technique', {infos: result,});
-        });
-    })
-
-    //the store page
-    app.get('/store', function(req,res){
-        req.collections.art.find({forSale: true}).toArray(function(error, peices){
-            if (error)
-                return next(error);
-            res.render('store', {pictures: peices});
-        });
-    })
-
-    //the checkout page
-    app.get('/checkout', function(req,res){
-        res.render('checkout', null)
-    })
-
-    //the gallery page
-    app.get('/gallery', function(req,res){
-        req.collections.art.find({}).toArray(function(error, result){
-            if (error)
-                return next(error);
-            res.render('gallery', {pictures: result});
-        });
-    });
-
-    //the contact page
-    app.get('/contact', function(req,res){
-        req.collections.infos.findOne({role: 'contact'}, function(error, result){
-            if (error)
-                return next(error);
-            res.render('contact', {infos: result,});
-        });
-    });
-
-    //the commission page
-    app.get('/commission', function(req,res){
-        res.render('commission', null)
-    });
-
-    //the admin page
-    app.get('/admin', isLoggedIn, function(req,res){
-        req.collections.art.find({}).toArray(function(error, peices){
-            if (error)
-                return next(error);
-            res.render('admin', {pictures: peices});
-        });
-    });
-
-    //something went wrong
-    app.get('/error', function(req,res){
-        res.render('error', null)
-    });
-
-    //required to make sorting by date work properly
-    function monthToN(month){
-        return ['---','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Nov','Dec'].indexOf(month);
-    }
+//required to make sorting by date work properly
+function monthToN(month){
+    return ['---','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Nov','Dec'].indexOf(month);
+}
 
     //performs transformations on the form data so that
     //the database contains more useful information
-};
 function formToDB(fields){
     fields.medium = fields.medium.charAt(0).toUpperCase() + fields.medium.slice(1).toLowerCase();
     fields.alt = fields.title;
