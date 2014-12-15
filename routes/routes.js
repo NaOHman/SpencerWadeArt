@@ -41,7 +41,6 @@ module.exports = function(app, mongoskin, path, passport) {
         req.collections.art.findOne({_id: myId}, function(err, result){
             if (err)
                 next(err);
-            console.log(result);
             res.render('checkout', {art: JSON.stringify(result)})
         })
     });
@@ -433,8 +432,6 @@ function fieldsToArray(fields){
         });
         i++;
     }
-    console.log(fields);
-    console.log(arr);
     return arr;
 }
 

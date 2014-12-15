@@ -3,11 +3,11 @@ SpencerWadeArt
 
 A website for artist Spencer Wade, who is partially colorblind.
 
-*Note:* If running this front end code, please run a simple http server in python in order to have the project be responsive. 
+To run this website locally clone the repository and change into the root directory
+then  run `node app.js` if you get an EACCES error, your user account doesn't have
+access to port 80, to work around this run `sudo node app.js`
 
-Use `cd` to get into the SpencerWadeArt directory.
-Then run `python -m SimpleHTTPServer`
-Then in the browser of your choice run `http://localhost:8000/`.
+Our database is hosted on MonogLabs
 
 Setting up the local SMTP server for sending emails
 ---------------------------------------------------
