@@ -28,7 +28,7 @@ html
             a(href='/gallery') Gallery
           li
             a(href='/technique') About the Art
-          li.active
+          li
             a(href='/about') About the Artist
           li
             a(href='/contact') Contact
@@ -37,12 +37,36 @@ html
           li
             a(href='/store') Store
     .container
-      form(action='/charge', method='POST')
-        script.stripe-button(src='https://checkout.stripe.com/checkout.js', 
-          data-key='pk_test_wPyPq4ModptnhHMCIhpg1hwc', 
-          data-amount='2000', 
-          data-name='Demo Site', 
-          data-description='2 widgets ($20.00)', 
-          data-image='/128x128.png')
+      h2 You have selected: 
+      h1(class='text-center')
+        | #{JSON.parse(art).title}
+      div(class="row text-center")
+        img(src=JSON.parse(art).imgsrc height=200)
+      br
+      p(class='text-center')
+        | Price: $#{JSON.parse(art).price}
+      p(class='text-center')
+        | Medium: #{JSON.parse(art).medium}
+      p(class='text-center')
+        | Dimensions: #{JSON.parse(art).dim}
+      p(class='text-center')
+        | Date: #{JSON.parse(art).date}
+      if JSON.parse(art).forSale == true
+        div(class="row text-center")
+          form(action='/charge', method='POST')
+            script.stripe-button(src='https://checkout.stripe.com/checkout.js', 
+              data-key='pk_test_wPyPq4ModptnhHMCIhpg1hwc', 
+              data-amount=JSON.parse(art).price, 
+              data-name=JSON.parse(art).title, 
+              data-description=JSON.parse(art).description, 
+              data-image=JSON.parse(art).imgsrc)
+      else
+        h3 We appologize, but this piece is not for sale at this time.
+        p 
+          | Please be sure to check out the 
+          a(href='/store') store
+          |  for an up-to-date list of available items.
+
+      br
 
 
