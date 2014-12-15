@@ -2,9 +2,7 @@ doctype html
 html
   head
     meta(charset='utf-8')
-    |     
-    title
-    |     
+    title Manage Artwork
     script(src='https://code.jquery.com/jquery-1.11.0.min.js')
     //if IE
       | script src=&quot;https://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;
@@ -22,7 +20,6 @@ html
       .container
         a.brand(href='/')
           img.img-responsive.center-block(src='images/logo.png')
-      |         
       div
         ul.navbar-justice-league.nav.navbar-nav
           li
@@ -31,10 +28,14 @@ html
           li.active
             a(href='/admin') Manage Artwork
           li
-            a(href='/edit') Change Info
+            a(href='/edit') Edit Site Info
           li
-            a(href='/Logout') Logout
-    // Page Content
+            a(href='/editbio') Edit About the Artist
+          li
+            a(href='/edittechnique') Edit About the Art
+          li
+            a(href='/logout') Logout
+          // Page Content
     .container
       // Page Heading
       .row

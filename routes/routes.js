@@ -32,6 +32,53 @@ module.exports = function(app, mongoskin, path, passport) {
             res.redirect('/admin')
         })
     });
+    app.post('/editbio', isLoggedIn, function(req, res){
+        var form = new formidable.IncomingForm();
+        form.parse(req, function(err, fields, files) {
+            //`file` is the name of the <input> field of type `file`
+            if (files.fileUpload.size > 0){
+                var old_path = files.fileUpload.path,
+                file_ext = files.fileUpload.name.split('.').pop(),
+                new_path = path.join(__dirname,'../', 'public','images', 'spencer' +'.' +file_ext);
+                img_path = path.join('images', 'spencer' + '.' + file_ext)
+                fs.readFile(old_path, function(err, data) {
+                    fs.writeFile(new_path, data, function(err) {
+                        fs.unlink(old_path, function(err) {
+                            if (err) {
+                                res.status(500);
+                                res.json({'success': false});
+                            } else {
+                                req.collections.infos.update({role: 'bio'},
+                                    {$set : {sections: fieldsToArray(fields),
+                                             imgsrc: img_path}},
+                                    {upsert: true}, 
+                                    function(err, response){
+                                        if (err)
+                                            next(err);
+                                        res.redirect('/editbio');
+                                    }
+                                );
+                            }
+                        });
+                    });
+                });
+            } else {
+                req.collections.infos.update({role: 'bio'},
+                    {$set : {sections: fieldsToArray(fields)}},
+                    {upsert: true}, 
+                    function(err, response){
+                        if (err)
+                            next(err);
+                        res.redirect('/editbio');
+                    }
+                );
+            }
+        });
+    });
+
+    app.post('/edittechnique', isLoggedIn, function(req, res){
+
+    });
 //	app.get('/signup', function(req, res) {
 //
 //		// render the page and pass in any flash data if it exists
@@ -66,7 +113,6 @@ module.exports = function(app, mongoskin, path, passport) {
         form.parse(req, function(err, fields, files) {
             //`file` is the name of the <input> field of type `file`
             var old_path = files.fileUpload.path,
-            file_size = files.fileUpload.size,
             file_ext = files.fileUpload.name.split('.').pop(),
             index = old_path.lastIndexOf('/') + 1,
             file_name = old_path.substr(index),
@@ -122,6 +168,19 @@ module.exports = function(app, mongoskin, path, passport) {
         res.render('edit');
     });
 
+    app.get('/editbio', isLoggedIn, function(req,res){
+        req.collections.infos.findOne({role: 'bio'}, function(error, result){
+            if (error)
+                return next(error);
+            sections = result.sections.length -1;
+            res.render('editbio', {infos: result,
+                                   n: sections});
+        });
+    });
+
+    app.get('/edittechnique', isLoggedIn, function(req,res){
+        res.render('edittechnique');
+    });
     //the home page
     app.get('/', function(req,res){
         req.collections.art.find({onHome: true}).toArray(function(error, result){
@@ -133,7 +192,12 @@ module.exports = function(app, mongoskin, path, passport) {
 
     //the about page
     app.get('/about', function(req,res){
-        res.render('about', null)
+        req.collections.infos.findOne({role: 'bio'}, function(error, result){
+            if (error)
+                return next(error);
+            sections = result.sections.length -1;
+            res.render('about', {infos: result});
+        });
     })
 
     //the technique page
@@ -195,32 +259,47 @@ module.exports = function(app, mongoskin, path, passport) {
 
     //performs transformations on the form data so that
     //the database contains more useful information
-    function formToDB(fields){
-        fields.medium = fields.medium.charAt(0).toUpperCase() + fields.medium.slice(1).toLowerCase();
-        fields.alt = fields.title;
-        fields.size = fields.height * fields.width;
-        fields.dim = fields.width + 'x' + fields.height;
-        fields.date = fields.year;
-        fields.numdate = (fields.year*1000) + (monthToN(fields.month)*100) + fields.day;
-        if (fields.depth != '')
-               fields.dim = fields.dim +'x' + fields.depth;
-        if (fields.month != '---'){
-           if (fields.day == '')
-               fields.date = fields.month + ' ' + fields.date;
-           else
-               fields.date = fields.month + ' '+ fields.day +', ' + fields.date;
-        }
-        if (fields.hasOwnProperty('forSale'))
-           fields.forSale = true;
-        else
-           fields.forSale = false;
-        if (fields.hasOwnProperty('onHome'))
-           fields.onHome = true;
-        else
-           fields.onHome = false;
-        return fields
-    }
 };
+function formToDB(fields){
+    fields.medium = fields.medium.charAt(0).toUpperCase() + fields.medium.slice(1).toLowerCase();
+    fields.alt = fields.title;
+    fields.size = fields.height * fields.width;
+    fields.dim = fields.width + 'x' + fields.height;
+    fields.date = fields.year;
+    fields.numdate = (fields.year*1000) + (monthToN(fields.month)*100) + fields.day;
+    if (fields.depth != '')
+           fields.dim = fields.dim +'x' + fields.depth;
+    if (fields.month != '---'){
+       if (fields.day == '')
+           fields.date = fields.month + ' ' + fields.date;
+       else
+           fields.date = fields.month + ' '+ fields.day +', ' + fields.date;
+    }
+    if (fields.hasOwnProperty('forSale'))
+       fields.forSale = true;
+    else
+       fields.forSale = false;
+    if (fields.hasOwnProperty('onHome'))
+       fields.onHome = true;
+    else
+       fields.onHome = false;
+    return fields
+}
+
+function fieldsToArray(fields){
+    var i = 0;
+    var arr = []
+    while(fields.hasOwnProperty("heading" + i)){
+        arr.push({
+            heading: fields["heading" + i],
+            text: fields["text" + i]
+        });
+        i++;
+    }
+    console.log(fields);
+    console.log(arr);
+    return arr;
+}
 
 // route middleware to make sure
 function isLoggedIn(req, res, next) {

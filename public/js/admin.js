@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var url = 'https://localhost:8080';
+    var url = 'https://localhost';
     $('.remove-btn').on('click', function(event){
         event.preventDefault();
         var id = $(this).attr('data-id').replace(/"/g,'');
@@ -20,26 +20,4 @@ $(document).ready(function() {
             }
         });
     });
-    /*
-    $('.update-art').submit(function(event){
-        event.preventDefault();
-        var id = $(this).attr('data-id').replace(/"/g,'');
-        var query = url + '/save/' + id;
-        alert("Put to " + query);
-        $.ajax({
-            url: query,
-            type: 'POST',
-            contentType: 'application/json',
-            dataType: 'json',
-            data: JSON.stringify({myId: id}),
-            success: function(data){
-                location.reload(true);
-                alert(data);
-            },
-            error: function(xhr, status, errorThrown){
-                alert("Problem updating artwork");
-            }
-        });
-    });
-        */
 });

@@ -1,0 +1,60 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title
+    script(src='https://code.jquery.com/jquery-1.11.0.min.js')
+    //if IE
+    // <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js">
+    // Bootstrap
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
+    // Latest compiled and minified JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    script(src='/js/sections.js')
+    script
+        | var sections = "!{n}";
+    link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container
+        a.brand(href='/')
+          img.img-responsive.center-block(src='images/logo.png')
+      |         
+      div
+        ul.navbar-justice-league.nav.navbar-nav
+          li
+            a(href='/')
+              span.glyphicon.glyphicon-home
+          li
+            a(href='/admin') Manage Artwork
+          li
+            a(href='/edit') Edit Site Info
+          li.active
+            a(href='/editbio') Edit About the Artist
+          li
+            a(href='/edittechnique') Edit About the Art
+          li
+            a(href='/logout') Logout
+    // Page Content
+    .container
+        h1 Edit About the Artist Page
+        form(role='form' enctype="multipart/form-data", method='post', action='editbio')
+            .col-sm-4
+                img.img-responsive(src=infos.imgsrc)
+                label.control-label(for='fileUpload') Upload Image
+                input(type='file', name='fileUpload')
+            .col-sm-6
+                #sections
+                    each val, index in infos.sections
+                        .section(id=index)
+                            .input-group
+                                input.form-control(name='heading'+index required value=val.heading)
+                                .input-group-btn
+                                    button.remove-btn.btn.btn-default(type='button' title='Remove section')
+                                        span.glyphicon.glyphicon-remove
+                            textarea.form-control(rows=7, required name='text'+index)
+                                =val.text
+
+                button#add-btn.btn.btn-default(type='button' title='Add a section')
+                    span.glyphicon.glyphicon-plus
+                button.btn.btn-primary(type='submit') Save Changes

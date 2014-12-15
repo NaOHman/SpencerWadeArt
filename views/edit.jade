@@ -2,12 +2,10 @@ doctype html
 html
   head
     meta(charset='utf-8')
-    |     
     title
-    |     
     script(src='https://code.jquery.com/jquery-1.11.0.min.js')
     //if IE
-      | script src=&quot;https://html5shiv.googlecode.com/svn/trunk/html5.js&quot;&gt;
+    // <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js">
     // Bootstrap
     // Latest compiled and minified CSS
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
@@ -16,8 +14,6 @@ html
     script(src='/js/admin.js')
     |     
     link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
-  block body
-    - var myMonths = ['---', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Nov','Dec']
     nav.navbar.navbar-inverse.navbar-fixed-top
       .container
         a.brand(href='/')
@@ -31,16 +27,43 @@ html
           li
             a(href='/admin') Manage Artwork
           li.active
-            a(href='/edit') Change Info
+            a(href='/edit') Edit Site Info
+          li
+            a(href='/editbio') Edit About the Artist
+          li
+            a(href='/edittechnique') Edit About the Art
           li
             a(href='/logout') Logout
     // Page Content
-    h2 Profile Pic
-    h2 Video Link
-    h2 Email
-    h2 Phone number
-    h2 Header Picture
-    h2 Front Page text
-    h2 About the artwork
-    h2 Bio
-    h2 Inspiration
+    .container
+        .col-sm-6
+            h2 Change Site Header
+            form(role='form' enctype="multipart/form-data", method='post', action='logo')
+                label.control-label(for='fileUpload') Upload Image
+                span.required *
+                input(type='file', name='fileUpload', required)
+                img.img-responsive.center-block(src='images/logo')
+                button.btn.btn-primary(type='submit') Save
+         .col-sm-6
+            h2 Change Contact info
+            form(role='form', method='post', action='contact')
+                .row
+                    .col-sm-6
+                        label.control-label(for='fileUpload') Email Address
+                        span.required *
+                    .col-sm-6
+                        input.form-control(type='textbox' name='email' value='someEmail' required)
+                .row
+                    .col-sm-6
+                        label.control-label(for='fileUpload') Phone Number
+                        span.required *
+                    .col-sm-6
+                        input.form-control(type='textbox' name='phone' value='555-555-5555' required)
+                .row
+                    button.btn.btn-primary(type='submit') Save
+    .container
+        h2 Change Front Page Text
+        form(role='form' method='post' action='info')
+            textarea.form-control(rows=7 name='frontpagetext')
+                |Welcome to Spencer Wade Art! Feel free to explore the website for the amazing colorblind artist! If you are intersted in browsing Spencer's many paintings, take a look at the gallery. Interested in learnig more about this unique art? Check out our about the art page! Curious who the mysterious Spencer Wade is? Read this for his biography and inspirations. Want to contact Spencer? We have a page for that, too! If you know what you want, feel free to make a comission. Want to buy a specific painting? Try out the store! Literally click any of those links or the nav bar on top and stop reading this dumb flavor text. Please.
+            button.btn.btn-primary(type='submit') Save

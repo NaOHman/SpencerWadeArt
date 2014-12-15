@@ -13,6 +13,7 @@ var app = express();
 var mongoskin = require('mongoskin');
 var db = mongoskin.db('mongodb://swart:bootsandcats@ds063330.mongolab.com:63330/artwork', {safe: true});
 var collections = {art: db.collection('art'),
+                   infos: db.collection('infos'),
                    users: db.collection('users')};
 
 app.use(function(req, res, next) {
@@ -55,6 +56,8 @@ app.use('/admin', ensureSecure);
 app.use('/edit', ensureSecure);
 app.use('/upload', ensureSecure);
 app.use('/save', ensureSecure);
+app.use('/editbio', ensureSecure);
+app.use('/edittechnique', ensureSecure);
 app.use('/remove', ensureSecure);
 app.use('/login', ensureSecure);
 

@@ -36,23 +36,10 @@ html
             a(href='/store') Store
     .container-fluid.container-centered
       #photo.col-xs-4
-        img.img-responsive(src='images/spencer.jpg')
-      |         
+        img.img-responsive(src=infos.imgsrc)
       #bio.col-xs-8
-        h2  Bio 
-        |             
-        p
-          | Spencer Wade began drawing when he was two years old. By the time he was three his sketch series
-          | Spaghetti Sauce on kitchen wall won national aclaim. He is currently studying art at Macalester
-          | College in Saint Paul Minnesota. Currently he paints in the basement of Berkeley Haus primarily using uncut oils
-          | on canvas. You probably haven&apos;t heard of him because he&apos;s too cool for you.
-        |             
-        h2  Inspiration 
-        |             
-        p
-          | Spencer really likes animals. Like a lot. Like a lot a lot. He has many fond
-          | memories of watching animal planet and channels this into his artwork. Spencer
-          | holds his nature documentaries to a high standard. for instance he was very
-          | upset about the honey badger documentary he watched last week because it
-          | played to existing honey badger stereotypes instead of providing the
-          | hard hitting badger facts he craves.
+        each val in infos.sections
+            h2 
+                =val.heading
+            p
+                =val.text
