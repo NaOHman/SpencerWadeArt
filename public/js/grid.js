@@ -335,9 +335,9 @@ var Grid = (function() {
 	function Preview( $item ) {
 		this.$item = $item;
 		this.expandedIdx = this.$item.index();
+		
 		this.create();
 		this.update();
-		console.log("title: "+this.$item.$title+", description: "+this.$description);
 	}
 
 	Preview.prototype = {
@@ -388,12 +388,15 @@ var Grid = (function() {
 					description : $itemEl.data( 'description' ),
 					forsale: $itemEl.data('forsale')
 				};
-			if(eldata.forsale == "true") {
+			/*
+			console.log(eldata.forsale);
+			if(eldata.forsale == true) {
 				console.log("true");
 			}
 			else {
 				console.log("false");
-			}
+			}*/
+
 			console.log(eldata.title + " "+eldata.description + " " + eldata.forsale);
 			this.$title.html( eldata.title );
 			this.$description.html( eldata.description );
