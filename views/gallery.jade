@@ -48,7 +48,13 @@ html
         ul#og-grid.og-grid
           each val in pictures
             li
-              a(href='/checkout?picid='+val._id, data-largesrc=val.imgsrc, data-title=val.title, data-description=val.description)
+              - var forsale = "false"
+              - if(val.forSale) {
+              -   forsale = "true";
+              - }
+              - var description = val.description;
+
+              a(href='/checkout?picid='+val._id, data-largesrc=val.imgsrc, data-title=val.title, data-description=description, data-forsale=forsale)
                 img(src=val.imgsrc, alt=val.alt, height=250)
     // /container
     script(src='js/grid.js')

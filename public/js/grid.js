@@ -337,6 +337,7 @@ var Grid = (function() {
 		this.expandedIdx = this.$item.index();
 		this.create();
 		this.update();
+		console.log("title: "+this.$item.$title+", description: "+this.$description);
 	}
 
 	Preview.prototype = {
@@ -344,7 +345,9 @@ var Grid = (function() {
 			// create Preview structure:
 			this.$title = $( '<h3></h3>' );
 			this.$description = $( '<p></p>' );
+			//if(this.$forsale == true) {
 			this.$href = $( '<a href="/checkout.html">Buy</a>' );
+			//}
 			this.$details = $( '<div class="og-details"></div>' ).append( this.$title, this.$description, this.$href );
 			this.$loading = $( '<div class="og-loading"></div>' );
 			this.$fullimage = $( '<div class="og-fullimg"></div>' ).append( this.$loading );
@@ -382,9 +385,16 @@ var Grid = (function() {
 					href : $itemEl.attr( 'href' ),
 					largesrc : $itemEl.data( 'largesrc' ),
 					title : $itemEl.data( 'title' ),
-					description : $itemEl.data( 'description' )
+					description : $itemEl.data( 'description' ),
+					forsale: $itemEl.data('forsale')
 				};
-
+			if(eldata.forsale == "true") {
+				console.log("true");
+			}
+			else {
+				console.log("false");
+			}
+			console.log(eldata.title + " "+eldata.description + " " + eldata.forsale);
 			this.$title.html( eldata.title );
 			this.$description.html( eldata.description );
 			this.$href.attr( 'href', eldata.href );

@@ -3,7 +3,7 @@ var formidable = require('formidable');
 var fs = require('fs');
 var stripe = require("stripe")("sk_test_okcgo9jT6TRRex0C8KQWifw8");
 
-module.exports = function(app, mongoskin, path, passport) {
+module.exports = function(app, mongoskin, path, passport, smtpTransport, url) {
     //GET ROUTES
     //the home page
     app.get('/', function(req,res){
@@ -125,13 +125,22 @@ module.exports = function(app, mongoskin, path, passport) {
         
     //route for sending email
     app.get('/send',function(req,res) {
+        var to = "Dum Dum <spencerwadetest@gmail.com>";
+        req.collections.infos.findOne({role: 'email'}, function(error, result){
+            if(result) {
+                to = result;
+            }
+            else {
+                console.log("There was a problem getting the email. Using default")
+            }
+        });
         var query = url.parse(req.url, true).query;
         var from = query.sendername+" <"+query.from+">";
         var subject = query.subject;
         var text = query.message;
         smtpTransport.sendMail({
             from: from,
-            to: "Dum Dum <spencerwadetest@gmail.com>",
+            to: to,
             subject: subject,
             text: text
         }, function(error, response) {

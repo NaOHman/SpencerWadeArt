@@ -3,6 +3,11 @@ $(document).ready(function() {
 	
 });
 
+function validateEmail(email) { 
+	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+	return re.test(email);
+}
+
 var sendEmail = function() {
 	var name, from, subject, message;
 	//$("#send_email").click(function() {
@@ -10,8 +15,27 @@ var sendEmail = function() {
 		from=$("#from").val();
 		subject=$("#subject").val();
 		message=$("#message").val();
+
+		if(!sendername) {
+			alert("Name is required.");
+			return;
+		}	
+		if(!from) {
+			alert("Email is required.");
+			return;
+		}
+		else {
+			if(!validateEmail(from)) {
+				alert("Please enter a valid email.");
+				return;
+			} 
+		}
+		if(!message) {
+			alert("Message is required.");
+			return;
+		}
 		//TODO need some kind of url variable not hardcoded
-		var url = "https://localhost:8080/send";
+		var url = "https://localhost/send";
 		$.ajax({
 			url: url,
 			type: 'GET',
@@ -24,7 +48,7 @@ var sendEmail = function() {
 				$("#message").val("");
 			},
 			error: function(e) {
-				alert("Bah");
+				alert("There was a problem sending the email");
 			}
 		})
 	//})
