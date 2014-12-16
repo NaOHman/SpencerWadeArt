@@ -346,7 +346,7 @@ var Grid = (function() {
 			this.$title = $( '<h3></h3>' );
 			this.$description = $( '<p></p>' );
 			//if(this.$forsale == true) {
-			this.$href = $( '<a href="/checkout.html">Buy</a>' );
+			this.$href = $( '<a id="buy-btn" href="/checkout.html">Buy</a>' );
 			//}
 			this.$details = $( '<div class="og-details"></div>' ).append( this.$title, this.$description, this.$href );
 			this.$loading = $( '<div class="og-loading"></div>' );
@@ -388,19 +388,12 @@ var Grid = (function() {
 					description : $itemEl.data( 'description' ),
 					forsale: $itemEl.data('forsale')
 				};
-			/*
-			console.log(eldata.forsale);
-			if(eldata.forsale == true) {
-				console.log("true");
-			}
-			else {
-				console.log("false");
-			}*/
 
-			console.log(eldata.title + " "+eldata.description + " " + eldata.forsale);
 			this.$title.html( eldata.title );
 			this.$description.html( eldata.description );
 			this.$href.attr( 'href', eldata.href );
+            if (eldata.forsale == false)
+                $("#buy-btn").remove();
 
 			var self = this;
 			
