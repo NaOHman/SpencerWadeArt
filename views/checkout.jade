@@ -54,9 +54,10 @@ html
       if JSON.parse(art).forSale == true
         div(class="row text-center")
           form(action='/charge', method='POST')
+            input(type=hiddent value=art._id) 
             script.stripe-button(src='https://checkout.stripe.com/checkout.js', 
               data-key='pk_test_wPyPq4ModptnhHMCIhpg1hwc', 
-              data-amount=JSON.parse(art).price, 
+              data-amount=JSON.parse(art).cents, 
               data-name=JSON.parse(art).title, 
               data-description=JSON.parse(art).description, 
               data-image=JSON.parse(art).imgsrc)

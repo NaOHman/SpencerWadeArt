@@ -51,7 +51,7 @@ html
                 .input-group
                     span.input-group-addon 
                         | $
-                    input.form-control(type='number', min='0', name='price', required)
+                    input.form-control(type='number' min='0' step='.01' name='price' required)
             .row
               .col-sm-6
                 label.control-label(for='title') Title
@@ -129,7 +129,7 @@ html
                     .input-group
                         span.input-group-addon 
                             | $
-                        input.form-control(type='number', min='0', name='price', value=val.price, required)
+                        input.form-control(type='number', step='.01' min='0', name='price', value=val.price, required)
                 .row
                   .col-sm-4
                     label.control-label(for='height') Height (in)

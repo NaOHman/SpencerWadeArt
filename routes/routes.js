@@ -177,7 +177,10 @@ module.exports = function(app, mongoskin, path, passport) {
                 // The card has been declined
             } else {
                 //Render a thank you page called "Charge"
-                res.render('charge', { title: 'Charge' });
+                myId = mongoskin.helper.toObjectID(fields.artId);
+                req.collections.art.update({_id: myId},{$set: {forSale: false}}, function(err, response){
+                    res.render('charge', { title: 'Charge' });
+                }
             }
         });
     });
@@ -403,6 +406,7 @@ function formToDB(fields){
     fields.dim = fields.width + 'x' + fields.height;
     fields.date = fields.year;
     fields.numdate = (fields.year*1000) + (monthToN(fields.month)*100) + fields.day;
+    fields.cents = 100 * fields.price;
     if (fields.depth != '')
            fields.dim = fields.dim +'x' + fields.depth;
     if (fields.month != '---'){
