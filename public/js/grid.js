@@ -345,7 +345,7 @@ var Grid = (function() {
 			// create Preview structure:
 			this.$title = $( '<h3></h3>' );
 			this.$description = $( '<p></p>' );
-			this.$href = $( '<a id="buy-btn" href="/checkout.html">Buy</a>' );
+			//this.$href = $( '<a id="buy-btn" href="/checkout.html">Buy</a>' );
 			this.$details = $( '<div class="og-details"></div>' ).append( this.$title, this.$description, this.$href );
 			this.$loading = $( '<div class="og-loading"></div>' );
 			this.$fullimage = $( '<div class="og-fullimg"></div>' ).append( this.$loading );
@@ -386,12 +386,12 @@ var Grid = (function() {
 					description : $itemEl.data( 'description' ),
 					forsale: $itemEl.data('forsale')
 				};
-            this.$href.attr( 'href', eldata.href );
 			this.$title.html( eldata.title );
 			this.$description.html( eldata.description );
             $('#buy-btn').remove();
             if (eldata.forsale){
                 this.$href = $( '<a id="buy-btn" href="/checkout.html">Buy</a>' );
+                this.$href.attr( 'href', eldata.href );
                 this.$details.append(this.$href)
             }
 
@@ -424,13 +424,23 @@ var Grid = (function() {
 				this.setHeights();
 				// scroll to position the preview in the right place
 				this.positionPreview();
+                $itemEl = this.$item.children( 'a' ),
+                    eldata = {
+                        href : $itemEl.attr( 'href' ),
+                        largesrc : $itemEl.data( 'largesrc' ),
+                        title : $itemEl.data( 'title' ),
+                        description : $itemEl.data( 'description' ),
+                        forsale: $itemEl.data('forsale')
+                    };
+                this.$title.html( eldata.title );
+                this.$description.html( eldata.description );
+                $('#buy-btn').remove();
+                if (eldata.forsale){
+                    this.$href = $( '<a id="buy-btn" href="/checkout.html">Buy</a>' );
+                    this.$href.attr( 'href', eldata.href );
+                    this.$details.append(this.$href);
+                }
 			}, this ), 25 );
-			forsale = this.$item.children( 'a' ).data('forsale')
-            $('#buy-btn').remove();
-            if (forsale){
-                this.$href = $( '<a id="buy-btn" href="/checkout.html">Buy</a>' );
-                this.$details.append(this.$href)
-            }
 		},
 		close : function() {
 
