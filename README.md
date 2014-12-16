@@ -7,6 +7,8 @@ To run this website locally clone the repository and change into the root direct
 then  run `node app.js` if you get an EACCES error, your user account doesn't have
 access to port 80, to work around this run `sudo node app.js`
 
+Also, if you get an error about this site being untrustworthy, this is probably because your browser doesn't like self sign certificates. Just accept it and move on. We're not going to give you viruses, we promise.
+
 Our database is hosted on MonogLabs
 
 Setting up the local SMTP server for sending emails
