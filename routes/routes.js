@@ -180,7 +180,7 @@ module.exports = function(app, mongoskin, path, passport) {
                 myId = mongoskin.helper.toObjectID(fields.artId);
                 req.collections.art.update({_id: myId},{$set: {forSale: false}}, function(err, response){
                     res.render('charge', { title: 'Charge' });
-                }
+                });
             }
         });
     });
@@ -199,7 +199,7 @@ module.exports = function(app, mongoskin, path, passport) {
         req.collections.art.update({_id: myId},{$set: fields}, function(err, response){
             if (err)
                 console.log(err);
-            res.redirect('/admin')
+            res.send(200);
         })
     });
 
@@ -355,7 +355,7 @@ module.exports = function(app, mongoskin, path, passport) {
         req.collections.art.update({_id: myId},{$set: fields}, function(err, response){
             if (err)
                 console.log(err);
-            res.redirect('/admin')
+            res.send({success: true});
         })
     });
 

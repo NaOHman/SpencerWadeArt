@@ -20,4 +20,17 @@ $(document).ready(function() {
             }
         });
     });
+    $('.save-btn').on('click', function(event){
+        event.preventDefault();
+        var query = url + '/save';
+        var data = {};
+        $(this).parents().eq(2).serializeArray().map(function(x){data[x.name] = x.value;}); 
+        $.ajax({
+            url : query,
+            type: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: JSON.stringify(data),
+        })
+    });
 });
