@@ -393,7 +393,6 @@ var Grid = (function() {
             if (eldata.forsale){
                 this.$href = $( '<a id="buy-btn" href="/checkout.html">Buy</a>' );
                 this.$details.append(this.$href)
-                console.log('for sale');
             }
 
 			var self = this;
@@ -426,6 +425,12 @@ var Grid = (function() {
 				// scroll to position the preview in the right place
 				this.positionPreview();
 			}, this ), 25 );
+			forsale = this.$item.children( 'a' ).data('forsale')
+            $('#buy-btn').remove();
+            if (forsale){
+                this.$href = $( '<a id="buy-btn" href="/checkout.html">Buy</a>' );
+                this.$details.append(this.$href)
+            }
 		},
 		close : function() {
 
@@ -457,9 +462,6 @@ var Grid = (function() {
 			return false;
 
 		},
-        isForSale : function() {
-			return this.$item.children( 'a' ).data('forsale');
-        },
 		calcHeight : function() {
 
 			var heightPreview = winsize.height - this.$item.data( 'height' ) - marginExpanded,
