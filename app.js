@@ -71,9 +71,20 @@ function ensureSecure(req, res, next){
         res.redirect('https://' + req.headers.host + '/login')
 }
 
+var smtpTransport = nodemailer.createTransport("SMTP",{
+    service: "localhost",
+    auth: {
+        user: "spencerwadetest@gmail.com",
+        pass: "bootsandcats"
+    }
+})
 
 require('./modules/authentication')(passport); // pass passport for configuration
-require('./routes/routes.js')(app, mongoskin, path, passport);
+require('./routes/routes.js')(app, mongoskin, path, passport, smtpTransport, url);
+
+
+
+
 
 server.listen(80, function() {
     var host = server.address().address;
