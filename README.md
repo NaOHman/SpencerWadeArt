@@ -19,3 +19,7 @@ Fake SMTP is writen in Java, and it is a `.jar` file located in the `utilities` 
 
 For more info please visit https://nilhcem.github.io/FakeSMTP/index.html.
 
+Payment
+---------------------------------------------------
+This project uses Stripe for payment. In order to prevent this test website from actually charging anyone's credit card, we have only used the test enviornment codes for stripe. If you would like to "make a purchace" on the website, please use one of the credit card examples listed https://stripe.com/docs/testing#cards any valid email address (like your own, you won't have your email recorded), any valid expiration date (ex 08/28), and any CCV of numbers (ex 888).
+

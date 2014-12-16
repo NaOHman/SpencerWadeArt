@@ -167,11 +167,13 @@ module.exports = function(app, mongoskin, path, passport) {
    //Stripe payment
     app.post('/charge', function(req, res) {
         var stripeToken = req.body.stripeToken;
+        var stripeEmail = req.body.stripeEmail;
+        var amount = req.body.data-amount
         var charge = stripe.charges.create({
-            amount: 1000, // amount in cents, again
+            amount: amount, // amount in cents, again
             currency: "usd",
             card: stripeToken,
-            description: "payinguser@example.com"
+            description: stripeEmail 
         }, function(err, charge) {
             if (err && err.type === 'StripeCardError') {
                 // The card has been declined
