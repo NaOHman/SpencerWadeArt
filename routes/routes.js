@@ -188,7 +188,7 @@ module.exports = function(app, mongoskin, path, passport, smtpTransport, url) {
                 // The card has been declined
             } else {
                 //Render a thank you page called "Charge"
-                myId = mongoskin.helper.toObjectID(fields.artId);
+                myId = mongoskin.helper.toObjectID(req.body.artId);
                 req.collections.art.update({_id: myId},{$set: {forSale: false}}, function(err, response){
                     res.render('charge', { title: 'Charge' });
                 });

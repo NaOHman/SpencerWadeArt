@@ -54,7 +54,7 @@ html
       if JSON.parse(art).forSale == true
         div(class="row text-center")
           form(action='/charge', method='POST')
-            input(type='hidden' value=art._id) 
+            input(name="artId" type='hidden' value=art._id) 
             script.stripe-button(src='https://checkout.stripe.com/checkout.js', 
               data-key='pk_test_wPyPq4ModptnhHMCIhpg1hwc', 
               data-amount=JSON.parse(art).cents, 
