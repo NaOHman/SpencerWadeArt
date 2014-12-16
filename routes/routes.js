@@ -175,6 +175,7 @@ module.exports = function(app, mongoskin, path, passport, smtpTransport, url) {
     })
    //Stripe payment
     app.post('/charge', function(req, res) {
+        console.log("charge");
         var stripeToken = req.body.stripeToken;
         var stripeEmail = req.body.stripeEmail;
         var amount = req.body.data-amount
@@ -188,7 +189,9 @@ module.exports = function(app, mongoskin, path, passport, smtpTransport, url) {
                 // The card has been declined
             } else {
                 //Render a thank you page called "Charge"
+                console.log(req.body.artId);
                 myId = mongoskin.helper.toObjectID(req.body.artId);
+                console.log(myId);
                 req.collections.art.update({_id: myId},{$set: {forSale: false}}, function(err, response){
                     res.render('charge', { title: 'Charge' });
                 });
