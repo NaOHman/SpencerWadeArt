@@ -9,6 +9,7 @@ html
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css')
     // Latest compiled and minified JavaScript
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js')
+    script(src='js/sender.js')
     link(rel='stylesheet', type='text/css', media='screen', href='css/master.css')
   body
     nav.navbar.navbar-inverse.navbar-fixed-top
@@ -37,14 +38,14 @@ html
       p
         | Want me to create a piece of art for you? Please fill out the form below
         | and I&apos;ll get back to you in a few days.
-      form(role='form')
+      form(onSubmit="sendEmail(); return false;" role='form')
         .row
           .col-sm-6
             label.control-label(for='name') Name*
-            input.form-control(type='textbox', name='name')
+            input#sendername.form-control(type='textbox', name='name')
           .col-sm-6
             label.control-label(for='email') Email*
-            input.form-control(type='textbox', name='email')
+            input#from.form-control(type='textbox', name='email')
         .row
           .col-sm-6
             label.control-label(for='timeline') Timeline
@@ -58,6 +59,6 @@ html
         |             
         label.control-label(for='message') Describe the commission
         |             
-        textarea.form-control(rows='5', name='message')
+        textarea#message.form-control(rows='5', name='message')
         |             
         button.btn.btn-default.btn-block(type='submit') Send
