@@ -11,10 +11,10 @@ var sendEmail = function() {
 		subject=$("#subject").val();
 		message=$("#message").val();
 		//TODO need some kind of url variable not hardcoded
-		var url = "https://localhost:8080/send";
+		var url = "https://localhost/send";
 		$.ajax({
 			url: url,
-			type: 'GET',
+			type: 'get',
 			data: {sendername: sendername, from:from,subject:subject,message:message},
 			success: function(data) {
 				alert("Sent!");
