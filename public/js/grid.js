@@ -345,9 +345,7 @@ var Grid = (function() {
 			// create Preview structure:
 			this.$title = $( '<h3></h3>' );
 			this.$description = $( '<p></p>' );
-			//if(this.$forsale == true) {
 			this.$href = $( '<a id="buy-btn" href="/checkout.html">Buy</a>' );
-			//}
 			this.$details = $( '<div class="og-details"></div>' ).append( this.$title, this.$description, this.$href );
 			this.$loading = $( '<div class="og-loading"></div>' );
 			this.$fullimage = $( '<div class="og-fullimg"></div>' ).append( this.$loading );
@@ -388,12 +386,15 @@ var Grid = (function() {
 					description : $itemEl.data( 'description' ),
 					forsale: $itemEl.data('forsale')
 				};
-
+            this.$href.attr( 'href', eldata.href );
 			this.$title.html( eldata.title );
 			this.$description.html( eldata.description );
-			this.$href.attr( 'href', eldata.href );
-            if (eldata.forsale == false)
-                $("#buy-btn").remove();
+            $('#buy-btn').remove();
+            if (eldata.forsale){
+                this.$href = $( '<a id="buy-btn" href="/checkout.html">Buy</a>' );
+                this.$details.append(this.$href)
+                console.log('for sale');
+            }
 
 			var self = this;
 			
@@ -419,14 +420,12 @@ var Grid = (function() {
 
 		},
 		open : function() {
-
 			setTimeout( $.proxy( function() {	
 				// set the height for the preview and the item
 				this.setHeights();
 				// scroll to position the preview in the right place
 				this.positionPreview();
 			}, this ), 25 );
-
 		},
 		close : function() {
 
@@ -458,6 +457,9 @@ var Grid = (function() {
 			return false;
 
 		},
+        isForSale : function() {
+			return this.$item.children( 'a' ).data('forsale');
+        },
 		calcHeight : function() {
 
 			var heightPreview = winsize.height - this.$item.data( 'height' ) - marginExpanded,
